@@ -1,0 +1,11 @@
+1. Home
+
+Use parrarel routes approach. 
+
+Handle Like Update post:
+ - User clicks on Like
+ - Instantly update the UI with state
+ - Call API to backend to update and increase like status and count
+ - If fail then revert the UI state 
+
+ 
