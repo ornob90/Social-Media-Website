@@ -9,8 +9,11 @@ const Navbar = () => {
         {/* Title and Logo */}
         <div className="flex items-center justify-between md:col-span-2">
           {/* Header  */}
-          <div className="flex items-center h-full gap-4 text-sm md:text-base">
+          <div className="flex items-center h-full gap-4 text-sm md:text-base justify-between w-full md:w-max">
             <p className="font-bold text-xl">WaveChat</p>
+            <div className="md:hidden">
+              <Links mobile />
+            </div>
           </div>
           {/* Menu Icon  */}
           <MobileMenu />

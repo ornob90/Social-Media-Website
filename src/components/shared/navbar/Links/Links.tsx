@@ -15,7 +15,7 @@ const Links = ({ mobile, setMenuOpen }: Links) => {
     <ul
       className={`${
         mobile
-          ? "flex flex-col   items-end px-[10%]"
+          ? "flex gap-3   items-end px-[10%]"
           : "justify-end items-center hidden gap-4 md:flex "
       }`}
     >
@@ -40,15 +40,25 @@ const Links = ({ mobile, setMenuOpen }: Links) => {
       <li>
         <Link
           href="/blogs"
-          className={`${
+          className={`flex items-center ${
             pathname === "/blogs" ? "text-dark font-bold" : "text-light"
           }`}
           onClick={() => mobile && setMenuOpen?.(false)}
         >
-          Blog
+          <Image
+            src="/assets/notification.svg"
+            alt="Notification Icon"
+            width={25}
+            height={25}
+          />
+          {/* Blog */}
         </Link>
       </li>
-      <li className="bg-black h-[33px] w-[33px] rounded-full"></li>
+      <li
+        className={`border-2 border-black  rounded-full ${
+          mobile ? "w-[30px] h-[24px]" : "h-[33px] w-[33px]"
+        }`}
+      ></li>
     </ul>
   );
 };
