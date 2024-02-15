@@ -18,11 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="max-w-[1512px] mx-auto bg-light-gray">
+      <body className=" bg-light-gray">
         <Navbar />
-        <div className="w-[90%] mx-auto">
+        <div className="w-[90%]  max-w-[1512px] mx-auto">
           {children}
-          <section className="grid grid-cols-8 gap-2 mt-2">
+          <section className="grid grid-cols-8 gap-3 mt-2">
             <div className="col-span-6">{feed}</div>
             <div className="col-span-2">{rightFeed}</div>
           </section>

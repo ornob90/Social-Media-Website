@@ -7,7 +7,7 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <div className="w-full md:w-[70%] lg:w-[60%]">
+    <div className="w-full md:w-[60%] lg:w-[55%] md:ml-16">
       <form className="relative ">
         <input
           onChange={(e) => setSearchQuery(e.target.value)}

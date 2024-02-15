@@ -3,10 +3,10 @@ import LeftNavigation from "@/components/ui/home/LeftNavigation/LeftNavigation";
 
 const Feed = () => {
   return (
-    <div className="min-h-screen grid grid-cols-8  gap-3">
+    <div className="min-h-screen grid grid-cols-8 gap-3">
       <LeftNavigation />
       {/* Main Feed  */}
-      <section className="col-span-6 bg-white min-h-screen">
+      <section className="col-span-6 bg-white min-h-screen px-4">
         <PostForm />
       </section>
     </div>

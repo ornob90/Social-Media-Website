@@ -1,7 +1,7 @@
 import { InputType } from "@/types/html.types";
 
 const Input = ({
-  type,
+  type = "text",
   placeholder,
   className,
   onChange,
