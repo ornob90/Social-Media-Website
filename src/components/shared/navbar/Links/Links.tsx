@@ -1,14 +1,17 @@
 "use client";
+import { LinkType } from "@/types/global.types";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 type Links = {
-  mobile?: Boolean;
+  mobile?: boolean;
   setMenuOpen?: Function;
+  navLinks: LinkType[];
+  flexCol?: boolean;
 };
 
-const Links = ({ mobile, setMenuOpen }: Links) => {
+const Links = ({ mobile, setMenuOpen, navLinks, flexCol }: Links) => {
   const pathname = usePathname();
 
   return (
@@ -17,48 +20,34 @@ const Links = ({ mobile, setMenuOpen }: Links) => {
         mobile
           ? "flex gap-3   items-end px-[10%]"
           : "justify-end items-center hidden gap-4 md:flex "
-      }`}
+      } ${flexCol ? "flex-col" : ""}`}
     >
-      <li>
-        <Link
-          href="/"
-          className={`flex items-center ${
-            pathname === "/" ? "text-dark font-bold" : "text-light"
-          }
+      {navLinks?.map((link) => (
+        <li key={link.src}>
+          <Link
+            href={link.href}
+            className={`flex items-center ${
+              pathname === link.href ? "text-dark font-bold" : "text-light"
+            }
           `}
-          onClick={() => mobile && setMenuOpen?.(false)}
-        >
-          <Image
-            src="/assets/message.svg"
-            alt="Message Icon"
-            width={25}
-            height={25}
-          />
-          {/* Home */}
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/blogs"
-          className={`flex items-center ${
-            pathname === "/blogs" ? "text-dark font-bold" : "text-light"
-          }`}
-          onClick={() => mobile && setMenuOpen?.(false)}
-        >
-          <Image
-            src="/assets/notification.svg"
-            alt="Notification Icon"
-            width={25}
-            height={25}
-          />
-          {/* Blog */}
-        </Link>
-      </li>
-      <li
+            onClick={() => mobile && setMenuOpen?.(false)}
+          >
+            <Image
+              src={link.src}
+              alt={link.alt}
+              width={link.width}
+              height={link.height}
+            />
+            {link.showName && link.name}
+          </Link>
+        </li>
+      ))}
+
+      {/* <li
         className={`border-2 border-black  rounded-full ${
           mobile ? "w-[30px] h-[24px]" : "h-[33px] w-[33px]"
         }`}
-      ></li>
+      ></li> */}
     </ul>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 
 const RightFeed = () => {
-  return <div className="h-[500px] bg-black">RightFeed</div>;
+  return <aside className="h-[500px] bg-black">RightFeed</aside>;
 };
 
 export default RightFeed;
