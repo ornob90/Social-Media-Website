@@ -22,8 +22,8 @@ export default function RootLayout({
         <Navbar />
         <div className="w-[90%] mx-auto">
           {children}
-          <section className="grid grid-cols-8">
-            <div className=" col-span-6">{feed}</div>
+          <section className="grid grid-cols-8 gap-2 mt-2">
+            <div className="col-span-6">{feed}</div>
             <div className="col-span-2">{rightFeed}</div>
           </section>
         </div>
