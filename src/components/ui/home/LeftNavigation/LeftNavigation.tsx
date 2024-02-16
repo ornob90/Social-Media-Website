@@ -1,6 +1,5 @@
-import Links from "@/components/shared/navbar/Links/Links";
+import Links from "@/components/shared/navbar/Links/LinksOld";
 import { sideHomeLinks } from "@/data/navLinks";
-import React from "react";
 
 const LeftNavigation = () => {
   return (

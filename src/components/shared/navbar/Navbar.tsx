@@ -1,7 +1,7 @@
 import React from "react";
 import MobileMenu from "./MobileMenu/MobileMenu";
 import Search from "./Search/Search";
-import Links from "./Links/Links";
+import Links from "./Links/LinksOld";
 import { navDesktopLinks } from "@/data/navLinks";
 const Navbar = () => {
   return (
@@ -21,7 +21,7 @@ const Navbar = () => {
         </div>
 
         {/* Search and  Nav Links for Desktop*/}
-        <div className="flex items-center justify-between md:col-span-5">
+        <div className="flex items-center  justify-end gap-4 md:col-span-5">
           <Search />
           <Links navLinks={navDesktopLinks} />
         </div>

@@ -18,9 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="">
         <Navbar />
-        <div className="w-[90%] grid grid-cols-8 max-w-[1512px] mx-auto">
+        <div className="w-[90%] grid grid-cols-9 gap-3 max-w-[1512px] mx-auto">
           <div className="col-span-2 relative">{sidebar}</div>
-          <div className="col-span-6 ">{children}</div>
+          <div className="col-span-7">{children}</div>
         </div>
       </body>
     </html>

@@ -4,7 +4,7 @@ import Image from "next/image";
 // import menuIcon from "/assets/menu.svg";
 // import closeMenuIcon from "/assets/closeMenu.svg";
 import { useState } from "react";
-import Links from "../Links/Links";
+import Links from "../Links/LinksOld";
 
 const MobileMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
