@@ -1,11 +1,11 @@
 import Drawer from "@/components/shared/drawer/Drawer";
 import Links from "@/components/shared/navbar/Links/Links";
-import React from "react";
+import { sideHomeLinks } from "@/data/navLinks";
 
 const Sidebar = () => {
   return (
     <Drawer>
-      <Links />
+      <Links links={sideHomeLinks} />
     </Drawer>
   );
 };
