@@ -9,23 +9,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  feed,
-  rightFeed,
+  sidebar,
 }: Readonly<{
   children: React.ReactNode;
-  feed: React.ReactNode;
-  rightFeed: React.ReactNode;
+  sidebar: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className=" bg-light-gray">
+      <body className="">
         <Navbar />
-        <div className="w-[90%]  max-w-[1512px] mx-auto">
-          {children}
-          <section className="grid grid-cols-8 gap-3 mt-2">
-            <div className="col-span-6">{feed}</div>
-            <div className="col-span-2">{rightFeed}</div>
-          </section>
+        <div className="w-[90%] grid grid-cols-8 max-w-[1512px] mx-auto">
+          <div className="col-span-2 relative">{sidebar}</div>
+          <div className="col-span-6 ">{children}</div>
         </div>
       </body>
     </html>
