@@ -7,3 +7,8 @@ export type InputType = {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onClick?: MouseEventHandler<HTMLInputElement>;
 };
+
+export type TextAreaType = {
+  className?: string;
+  children?: React.ReactNode;
+};
