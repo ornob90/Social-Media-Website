@@ -8,15 +8,15 @@ export type LinkType = {
   showName: boolean;
 };
 
-export interface Params {
-  params: { slug: string };
-}
+export type Params = {
+  [key: string]: string;
+};
 
-export interface SearchParams {
-  searchParams: { [key: string]: string | string[] | undefined };
-}
+export type SearchParams = {
+  [key: string]: string | string[] | undefined;
+};
 
-export interface ParamsSearchParams {
+export type ParamsSearchParams = {
   params: { slug: string };
   searchParams?: { [key: string]: string | string[] | undefined };
-}
+};

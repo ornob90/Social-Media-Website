@@ -21,7 +21,7 @@ export default function RootLayout({
   sidebar: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="light">
       <body className={`dark:bg-dark-primary ${poppins.className}`}>
         <Navbar />
         <div className=" w-[90%] grid grid-cols-1 lg:grid-cols-9 gap-3 max-w-[1512px] mx-auto">

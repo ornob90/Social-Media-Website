@@ -4,7 +4,7 @@ import React from "react";
 const PostDetails = () => {
   return (
     <section className="mb-10">
-      <Post value={0} />
+      <Post value={2} />
     </section>
   );
 };

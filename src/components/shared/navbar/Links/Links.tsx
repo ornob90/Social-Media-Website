@@ -8,7 +8,7 @@ type Links = {
   searchParams: SearchParams;
 };
 
-const Links = ({ links, searchParams: { searchParams } }: Links) => {
+const Links = ({ links, searchParams }: Links) => {
   const activeNav: string =
     typeof searchParams["active-side-nav"] === "string"
       ? searchParams["active-side-nav"]
