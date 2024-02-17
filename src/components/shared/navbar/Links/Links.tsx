@@ -9,7 +9,10 @@ type Links = {
 };
 
 const Links = ({ links, searchParams: { searchParams } }: Links) => {
-  const activeNav: string = searchParams["active-side-nav"] || "home";
+  const activeNav: string =
+    typeof searchParams["active-side-nav"] === "string"
+      ? searchParams["active-side-nav"]
+      : "home";
 
   return (
     <ul className="flex-col gap-3">

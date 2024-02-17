@@ -9,7 +9,7 @@ const Drawer = ({
 }) => {
   return (
     <aside
-      className={` mr-3 dark:bg-dark-primary sticky top-0 left-[5%] w-full duration-500 ${className}`}
+      className={`hidden lg:flex mr-3 dark:bg-dark-primary sticky top-0 left-[5%] w-full duration-500 ${className}`}
     >
       {children}
     </aside>
