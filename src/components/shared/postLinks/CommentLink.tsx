@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-const Comment = () => {
+const CommentLink = () => {
   return (
     <div className="flex gap-2 cursor-pointer">
       <Image
@@ -15,4 +15,4 @@ const Comment = () => {
   );
 };
 
-export default Comment;
+export default CommentLink;

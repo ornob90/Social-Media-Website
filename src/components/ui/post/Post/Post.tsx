@@ -1,9 +1,10 @@
-import Comment from "@/components/shared/postLinks/Comment";
 import Like from "@/components/shared/postLinks/Like";
 import Share from "@/components/shared/postLinks/Share";
 import ProfilePic from "@/components/shared/profilePic/ProfilePic";
 import Image from "next/image";
 import React from "react";
+import Comments from "./Comments/Comments";
+import CommentLink from "@/components/shared/postLinks/CommentLink";
 
 const Post = ({ value }) => {
   return (
@@ -42,9 +43,10 @@ const Post = ({ value }) => {
       {/* Like Share Comment  */}
       <div className="flex gap-10 text-dark-gray mt-3">
         <Like />
-        <Comment />
+        <CommentLink />
         <Share />
       </div>
+      <Comments />
     </div>
   );
 };
