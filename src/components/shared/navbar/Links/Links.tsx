@@ -20,7 +20,7 @@ const Links = ({ links, searchParams: { searchParams } }: Links) => {
         <li key={link.alt} className="mt-2">
           <Link
             href={link.href}
-            className={`hover:bg-light-gray py-3 px-3 font-semibold dark:text-white dark:bg-dark-gray rounded-lg shadow-sm flex gap-2 items-center ${
+            className={`hover:bg-light-gray hover:dark:bg-dark-gray duration-300 py-3 px-3 font-semibold dark:text-white  rounded-lg shadow-sm flex gap-2 items-center ${
               activeNav?.toLowerCase() === link?.name?.toLowerCase()
                 ? "bg-light-gray dark:bg-dark-gray dark:text-white"
                 : ""

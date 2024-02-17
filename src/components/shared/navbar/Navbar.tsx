@@ -11,7 +11,9 @@ const Navbar = () => {
         <div className="flex items-center justify-between md:col-span-1 w-max">
           {/* Header  */}
           <div className="flex items-center h-full gap-4 text-sm md:text-base justify-between w-full md:w-max">
-            <p className="font-bold text-xl dark:text-white">WaveChat</p>
+            <p className="font-bold text-xl dark:text-white">
+              Wave<span className="text-primary">Chat</span>
+            </p>
             <div className="md:hidden">
               <Links mobile navLinks={navDesktopLinks} />
             </div>

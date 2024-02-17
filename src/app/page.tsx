@@ -1,3 +1,11 @@
+import Header from "@/components/shared/header/Header";
+import Posts from "@/components/ui/post/Posts/Posts";
+
 export default function Home() {
-  return <main className="bg-dark-primary h-[2000px] w-full"></main>;
+  return (
+    <main className="w-full">
+      <Header header="Home" />
+      <Posts />
+    </main>
+  );
 }
