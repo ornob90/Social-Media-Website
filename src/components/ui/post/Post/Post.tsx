@@ -41,12 +41,16 @@ const Post = ({ value }) => {
       </div>
 
       {/* Like Share Comment  */}
-      <div className="flex gap-10 text-dark-gray mt-3">
+
+      <div className="flex gap-10 text-dark-gray mt-3 ">
         <Like />
         <CommentLink />
         <Share />
       </div>
-      <Comments />
+      {/* TODO  */}
+      <div className="hidden">
+        <Comments />
+      </div>
     </div>
   );
 };
