@@ -11,7 +11,7 @@ const Input = ({
     <input
       type={type}
       placeholder={placeholder}
-      className={`focus:outline-none bg-white ${className}`}
+      className={`focus:outline-none  ${className}`}
       onClick={onClick}
       onChange={onChange}
     />
