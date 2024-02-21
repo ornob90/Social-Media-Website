@@ -11,20 +11,22 @@ const Navbar = () => {
     <nav className="dark:bg-dark-primary mx-auto w-full min-h-[50px] py-3  relative">
       <div className="max-w-[1512px] grid grid-cols-1 md:grid-cols-6 w-[90%] mx-auto items-center gap-4 md:gap-0 ">
         {/* Title and Logo */}
-        <div className="flex items-center gap-2 justify-between md:col-span-1  ">
+        <div className="flex items-center gap-2  justify-between md:col-span-1  ">
           {/* Header  */}
-          <div className="flex items-center h-full gap-4 text-sm md:text-base justify-between w-full md:w-max ">
-            <p className="font-bold text-xl dark:text-white flex items-center gap-2">
+          <div className="flex items-center h-full text-sm md:text-base justify-between w-full md:w-max ">
+            <div className="flex items-center gap-2">
               <MobileMenu />
-              Wave<span className="text-primary">Chat</span>
-            </p>
+              <p className="font-bold text-xl dark:text-white flex items-center gap-2 ">
+                Wave<span className="text-primary">Chat</span>
+              </p>
+            </div>
 
             <div className="md:hidden">
               <Links links={navLinks} flexRow />
             </div>
           </div>
           {/* Menu Icon  */}
-          <div className="md:hidden ml-4">
+          <div className="md:hidden ml-4 ">
             <ProfilePic />
           </div>
         </div>
