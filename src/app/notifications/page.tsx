@@ -1,6 +1,5 @@
 import Header from "@/components/shared/header/Header";
 import ProfilePic from "@/components/shared/profilePic/ProfilePic";
-import React from "react";
 
 const NotificationsPage = () => {
   return (
