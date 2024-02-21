@@ -48,7 +48,7 @@ const Post = ({ value }) => {
         <Share />
       </div>
       {/* TODO  */}
-      <div className="hidden">
+      <div className="">
         <Comments />
       </div>
     </div>
