@@ -1,18 +1,18 @@
 "use client";
-
 import Image from "next/image";
-// import menuIcon from "/assets/menu.svg";
-// import closeMenuIcon from "/assets/closeMenu.svg";
-import Links from "../Links/Links";
-import { navLinks } from "@/data/navLinks";
-import { useAppSelector } from "@/lib/hooks";
+
+import { useAppDispatch } from "@/lib/hooks";
+import { changeMenuState } from "@/lib/features/nav/navSlice";
 
 const MobileMenu = () => {
-  const menuOpen = useAppSelector((state) => state.nav.menuOpen);
-  console.log(menuOpen);
+  const dispatch = useAppDispatch();
+
   return (
     <div>
-      <div className="relative h-[18px] sm:h-[20px] w-[18px] sm:w-[20px] md:hidden ">
+      <div
+        onClick={() => dispatch(changeMenuState())}
+        className="relative h-[18px] sm:h-[20px] w-[18px] sm:w-[20px] lg:hidden "
+      >
         <Image src="/assets/menu.svg" fill alt="Mobile Menu Icon" />
       </div>
 

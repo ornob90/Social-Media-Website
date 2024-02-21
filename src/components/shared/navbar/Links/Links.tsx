@@ -1,7 +1,8 @@
+"use client";
 import { LinkType, SearchParams } from "@/types/global.types";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { usePathname } from "next/navigation";
 
 type Links = {
   links: LinkType[];
@@ -16,6 +17,8 @@ const Links = ({ links, searchParams, disableActive, flexRow }: Links) => {
       ? searchParams["active-side-nav"]
       : "home";
 
+  const path = usePathname();
+
   return (
     <ul
       className={`flex ${
@@ -29,8 +32,7 @@ const Links = ({ links, searchParams, disableActive, flexRow }: Links) => {
             className={`hover:bg-light-gray hover:dark:bg-dark-gray duration-300  font-semibold dark:text-white  rounded-lg shadow-sm flex gap-2 items-center ${
               flexRow ? "" : "py-3 px-3"
             } ${
-              !disableActive &&
-              activeNav?.toLowerCase() === link?.name?.toLowerCase()
+              !disableActive && path === link.href
                 ? "bg-light-gray dark:bg-dark-gray dark:text-white"
                 : ""
             }`}
