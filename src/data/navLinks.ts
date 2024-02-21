@@ -1,6 +1,6 @@
 import { LinkType } from "@/types/global.types";
 
-export const navDesktopLinks: LinkType[] = [
+export const navLinks: LinkType[] = [
   {
     src: "/assets/message.svg",
     width: 25,

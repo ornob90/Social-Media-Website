@@ -13,7 +13,7 @@ const MobileMenu = () => {
     <div>
       <div
         onClick={() => setMenuOpen(!menuOpen)}
-        className="relative h-[18px] sm:h-[20px] w-[18px] sm:w-[20px] md:hidden"
+        className="relative h-[18px] sm:h-[20px] w-[18px] sm:w-[20px] md:hidden "
       >
         <Image src="/assets/menu.svg" fill alt="Mobile Menu Icon" />
       </div>

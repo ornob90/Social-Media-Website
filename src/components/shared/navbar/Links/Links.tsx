@@ -5,22 +5,31 @@ import React from "react";
 
 type Links = {
   links: LinkType[];
-  searchParams: SearchParams;
+  searchParams?: SearchParams;
+  disableActive?: boolean;
+  flexRow?: boolean;
 };
 
-const Links = ({ links, searchParams }: Links) => {
+const Links = ({ links, searchParams, disableActive, flexRow }: Links) => {
   const activeNav: string =
-    typeof searchParams["active-side-nav"] === "string"
+    searchParams && typeof searchParams["active-side-nav"] === "string"
       ? searchParams["active-side-nav"]
       : "home";
 
   return (
-    <ul className="flex-col gap-3">
+    <ul
+      className={`flex ${
+        flexRow ? "flex-row items-center gap-2" : "flex-col gap-2"
+      }`}
+    >
       {links?.map((link: LinkType) => (
-        <li key={link.alt} className="mt-2">
+        <li key={link.alt}>
           <Link
             href={link.href}
-            className={`hover:bg-light-gray hover:dark:bg-dark-gray duration-300 py-3 px-3 font-semibold dark:text-white  rounded-lg shadow-sm flex gap-2 items-center ${
+            className={`hover:bg-light-gray hover:dark:bg-dark-gray duration-300  font-semibold dark:text-white  rounded-lg shadow-sm flex gap-2 items-center ${
+              flexRow ? "" : "py-3 px-3"
+            } ${
+              !disableActive &&
               activeNav?.toLowerCase() === link?.name?.toLowerCase()
                 ? "bg-light-gray dark:bg-dark-gray dark:text-white"
                 : ""
@@ -32,7 +41,7 @@ const Links = ({ links, searchParams }: Links) => {
               width={link.width}
               height={link.height}
             />
-            <p className="text-[14px]">{link.name}</p>
+            {link.showName && <p className="text-[14px]">{link.name}</p>}
           </Link>
         </li>
       ))}
