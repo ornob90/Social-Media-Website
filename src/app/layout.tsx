@@ -27,7 +27,7 @@ export default function RootLayout({
         <StoreProvider>
           <Navbar />
           <div className=" w-[90%] grid grid-cols-1 lg:grid-cols-9 gap-3 max-w-[1512px] mx-auto ">
-            <div className="lg:col-span-2 relative">{sidebar}</div>
+            <div className="lg:col-span-2 relative h-auto ">{sidebar}</div>
             <div className="w-full lg:ml-5 md:w-[80%] lg:w-full mx-auto lg:col-span-7">
               {children}
             </div>

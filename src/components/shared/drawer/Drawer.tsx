@@ -7,13 +7,11 @@ const Drawer = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <aside
-      className={` mr-3 dark:bg-dark-primary sticky top-0 left-[5%] h-screen  duration-500  ${
-        menuOpen ? "w-full" : "w-0 lg:w-full h-0 lg:h-auto"
+      className={` mr-3 dark:bg-dark-primary sticky top-0 left-[5%] duration-500  ${
+        menuOpen ? "w-full h-[calc(100vh-60px)]" : "w-0 lg:w-full h-0 lg:h-auto"
       }`}
     >
-      <div
-        className={`${menuOpen ? "" : "opacity-0 lg:opacity-100 lg:block"} `}
-      >
+      <div className={`${menuOpen ? "" : "hidden lg:opacity-100 lg:block"} `}>
         {children}
       </div>
     </aside>

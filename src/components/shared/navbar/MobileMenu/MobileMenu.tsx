@@ -11,7 +11,8 @@ const MobileMenu = () => {
     <div>
       <div
         onClick={() => dispatch(changeMenuState())}
-        className="relative h-[18px] sm:h-[20px] w-[18px] sm:w-[20px] lg:hidden "
+        className="relative h-[18px] sm:h-[20px] w-[18px] sm:w-[20px] lg:hidden
+        "
       >
         <Image src="/assets/menu.svg" fill alt="Mobile Menu Icon" />
       </div>

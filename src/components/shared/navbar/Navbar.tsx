@@ -16,7 +16,7 @@ const Navbar = () => {
           <div className="flex items-center h-full text-sm md:text-base justify-between w-full md:w-max ">
             <div className="flex items-center gap-2">
               <MobileMenu />
-              <p className="font-bold text-xl dark:text-white flex items-center gap-2 ">
+              <p className="font-bold text-xl dark:text-white flex items-center ">
                 Wave<span className="text-primary">Chat</span>
               </p>
             </div>
