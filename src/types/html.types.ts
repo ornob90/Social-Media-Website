@@ -6,6 +6,7 @@ export type InputType = {
   className?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onClick?: MouseEventHandler<HTMLInputElement>;
+  required?: boolean;
 };
 
 export type TextAreaType = {

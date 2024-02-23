@@ -6,6 +6,7 @@ const Input = ({
   className,
   onChange,
   onClick,
+  required,
 }: InputType) => {
   return (
     <input
@@ -14,6 +15,7 @@ const Input = ({
       className={`focus:outline-none  ${className}`}
       onClick={onClick}
       onChange={onChange}
+      required={required ? true : false}
     />
   );
 };
