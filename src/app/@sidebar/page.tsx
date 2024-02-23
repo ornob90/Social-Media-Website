@@ -2,7 +2,7 @@ import Drawer from "@/components/shared/drawer/Drawer";
 import Links from "@/components/shared/navbar/Links/Links";
 import { sideHomeLinks } from "@/data/navLinks";
 
-const Sidebar = () => {
+const Sidebar = async () => {
   return (
     <Drawer>
       <div className="flex flex-col justify-between h-[calc(100vh-60px)] ">

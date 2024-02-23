@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppSelector } from "@/lib/hooks";
+import { useAppSelector } from "@/lib/redux/hooks";
 
 const Drawer = ({ children }: { children: React.ReactNode }) => {
   const menuOpen = useAppSelector((state) => state.nav.menuOpen);
