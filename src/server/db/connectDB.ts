@@ -1,11 +1,8 @@
-import { Connection } from "mongoose";
-
-const mongoose = require("mongoose");
+import mongoose, { Connection, Mongoose } from "mongoose";
 
 // Object to keep track of the connection status and the retry attempts in cast of connection failure
 const connection = {
   isConnected: false,
-  retryCount: 2,
 };
 
 // Function to construct the MongoDB connection string
@@ -34,14 +31,13 @@ const connectDB = async (): Promise<void> => {
   const mongoURI = getConnectionString();
 
   try {
-    const db: Connection = await mongoose.connect(mongoURI, {
+    const db: Mongoose = await mongoose.connect(mongoURI, {
       dbName: process.env.DB_NAME,
     });
 
-    connection.isConnected = db.readyState === 1;
+    connection.isConnected = db.connection.readyState === 1;
 
-    if (!connection.isConnected && connection.retryCount > 0) {
-      connection.retryCount--;
+    if (!connection.isConnected) {
       connectDB();
     }
   } catch (error) {

@@ -8,7 +8,9 @@ const Button = ({
   children: React.ReactNode;
 }) => {
   return (
-    <button className={`bg-primary text-white ${className}`}>{children}</button>
+    <button className={`  ${className || "bg-primary text-white"}`}>
+      {children}
+    </button>
   );
 };
 
