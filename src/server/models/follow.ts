@@ -1,5 +1,5 @@
 // Import required modules
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, model, models } from "mongoose";
 
 interface IFollow extends Document {
   following: mongoose.Types.ObjectId;
@@ -24,5 +24,5 @@ const followSchema: Schema = new Schema({
   },
 });
 
-const Follow = mongoose.model<IFollow>("Follow", followSchema);
+const Follow = models.Follow || model<IFollow>("Follow", followSchema);
 export default Follow;
