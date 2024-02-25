@@ -1,17 +1,5 @@
-import { Document, Schema, Types, model, models } from "mongoose";
-
-enum ActivityType {
-  Likes = "likes",
-  Comment = "comments",
-  Share = "shares",
-}
-
-interface IActivity extends Document {
-  user: Types.ObjectId;
-  post: Types.ObjectId;
-  content?: string;
-  activityType: ActivityType;
-}
+import { ActivityType, IActivity } from "@/types/models.types";
+import { Schema, Types, model, models } from "mongoose";
 
 const activitySchema: Schema = new Schema({
   user: {

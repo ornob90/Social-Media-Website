@@ -1,11 +1,5 @@
-import { Document, Schema, Types, model, models } from "mongoose";
-
-interface IMessage extends Document {
-  sender: Types.ObjectId;
-  receiver: Types.ObjectId;
-  message: string;
-  timestamp: Date;
-}
+import { IMessage } from "@/types/models.types";
+import { Schema, Types, model, models } from "mongoose";
 
 const messageSchema: Schema = new Schema({
   sender: {

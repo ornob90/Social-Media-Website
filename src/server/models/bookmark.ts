@@ -1,10 +1,5 @@
-import { Document, Schema, Types, model, models } from "mongoose";
-
-interface IBookmark extends Document {
-  post: Types.ObjectId;
-  user: Types.ObjectId;
-  timestamp: Date;
-}
+import { IBookmark } from "@/types/models.types";
+import { Schema, Types, model, models } from "mongoose";
 
 const bookmarkSchema: Schema = new Schema({
   post: {

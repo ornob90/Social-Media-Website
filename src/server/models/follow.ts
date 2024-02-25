@@ -1,11 +1,6 @@
 // Import required modules
+import { IFollow } from "@/types/models.types";
 import mongoose, { Document, Schema, model, models } from "mongoose";
-
-interface IFollow extends Document {
-  following: mongoose.Types.ObjectId;
-  follower: mongoose.Types.ObjectId;
-  timestamp: Date;
-}
 
 const followSchema: Schema = new Schema({
   following: {
