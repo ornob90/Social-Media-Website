@@ -2,6 +2,7 @@ import { InputType } from "@/types/html.types";
 
 const Input = ({
   type = "text",
+  name,
   placeholder,
   className,
   onChange,
@@ -13,6 +14,7 @@ const Input = ({
       type={type}
       placeholder={placeholder}
       className={`focus:outline-none  ${className}`}
+      name={name}
       onClick={onClick}
       onChange={onChange}
       required={required ? true : false}

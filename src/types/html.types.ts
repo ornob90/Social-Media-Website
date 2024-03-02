@@ -2,6 +2,7 @@ import { ChangeEvent, MouseEventHandler } from "react";
 
 export type InputType = {
   type?: string;
+  name?: string;
   placeholder?: string;
   className?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;

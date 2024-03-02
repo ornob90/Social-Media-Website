@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import React from "react";
+import { signIn } from "@/actions/auth/actions";
 
 const Register = async () => {
   const session = await getServerSession();
@@ -16,26 +17,30 @@ const Register = async () => {
     <section className="">
       <Header header="Create your account" />
       <form
-        action=""
+        action={signIn}
         className="flex flex-col gap-4 mt-4 w-full md:w-[70%] lg:w-1/2"
       >
         <Input
           className="py-3 pl-2 bg-light-gray rounded-lg placeholder:text-sm"
           placeholder="Username"
+          name="userName"
         />
         <Input
           className="py-3 pl-2 bg-light-gray rounded-lg placeholder:text-sm"
           placeholder="Display name"
+          name="displayName"
         />
         <Input
           className="py-3 pl-2 bg-light-gray rounded-lg placeholder:text-sm"
           placeholder="Email"
           type="email"
+          name="email"
         />
         <Input
           className="py-3 pl-2 bg-light-gray rounded-lg placeholder:text-sm"
           placeholder="password"
           type="password"
+          name="password"
         />
         <p className="text-[12px] text-dark-gray">
           By signing up, you agree to the Terms of Service and Privacy Policy,
@@ -44,7 +49,7 @@ const Register = async () => {
         </p>
         <Button className="py-2 rounded-lg">Next</Button>
         <p className="text-[12px] text-dark-gray">
-          Already have an account?{" "}
+          Already have an account?
           <Link href="/login" className="text-primary font-bold underline">
             Log in
           </Link>
