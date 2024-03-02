@@ -1,10 +1,17 @@
 import Button from "@/components/html/Button/Button";
 import Input from "@/components/html/Input/Input";
 import Header from "@/components/shared/header/Header";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import React from "react";
 
-const Signup = () => {
+const Register = async () => {
+  const session = await getServerSession();
+
+  if (session) {
+    redirect("/");
+  }
   return (
     <section className="">
       <Header header="Create your account" />
@@ -47,4 +54,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Register;
