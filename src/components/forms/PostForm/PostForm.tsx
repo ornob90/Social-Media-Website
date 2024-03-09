@@ -9,11 +9,14 @@ const PostForm = () => {
         name=""
         id=""
         placeholder="What's happening?"
-        className="w-[49%] min-h-[150px] focus:outline-none bg-light-gray pl-4 py-4 placeholder:text-base md:placeholder:text-md rounded-lg"
+        className="w-full lg:w-[49%] min-h-[150px] focus:outline-none bg-light-gray pl-4 py-4 placeholder:text-base md:placeholder:text-md rounded-lg"
       />
-      <div className=" grid w-full h-full grid-cols-3 gap-4 mt-5">
+      <div className=" grid w-full h-full grid-cols-2  md:grid-cols-3 gap-4 mt-5">
         {[1, 2, 3].map((val) => (
-          <div className="relative  h-[200px] rounded-lg" key={val}>
+          <div
+            className="relative  h-[120px] min-[400px]:h-[150px] min-[500px]:h-[170px] min-[570px]:h-[190px] md:h-[170px] lg:h-[200px] rounded-lg"
+            key={val}
+          >
             <Image
               src="https://plus.unsplash.com/premium_photo-1663100722417-6e36673fe0ed?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="post image"

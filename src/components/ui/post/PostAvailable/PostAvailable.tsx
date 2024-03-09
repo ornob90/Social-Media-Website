@@ -17,11 +17,13 @@ const PostAvailable = ({
         isActive ? "bg-light-gray dark:bg-dark-gray rounded-md " : ""
       }`}
     >
-      <div className="flex bg-light-gray dark:bg-dark-gray justify-center items-center px-4 rounded-md">
+      <div className="flex bg-light-gray dark:bg-dark-gray justify-center items-center px-4 rounded-md overflow-auto">
         <Image src={src} alt={alt} height={18} width={18} />
       </div>
-      <div className="flex justify-between flex-col">
-        <h3 className="font-bold dark:text-white">{type}</h3>
+      <div className="flex justify-between flex-col pr-2 ">
+        <h3 className="text-[14px] md:text-base font-bold dark:text-white">
+          {type}
+        </h3>
         <p
           className={`text-dark-gray text-[12px] sm:text-sm ${
             isActive ? "dark:text-black" : ""

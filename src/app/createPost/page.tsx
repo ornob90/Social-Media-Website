@@ -6,24 +6,26 @@ import { SearchParams } from "@/types/global.types";
 const CreatePost = ({ searchParams }: { searchParams: SearchParams }) => {
   const postAvailable = searchParams["post-available"] || "people";
   return (
-    <section>
+    <section className="w-full ">
       <Header header="Create a Post" />
       {/* Post Availability  */}
-      <div className="flex gap-4">
-        <PostAvailable
-          src="/assets/globe.svg"
-          alt="Globe Icon"
-          type="People"
-          subText="Your Post will be global"
-          isActive={postAvailable === "people"}
-        />
-        <PostAvailable
-          src="/assets/lock.svg"
-          alt="Lock Icon"
-          type="Private"
-          subText="Your Post will be private"
-          isActive={postAvailable === "private"}
-        />
+      <div className="overflow-auto no-scrollbar">
+        <div className="flex gap-4 min-w-[490px] overflow-scroll no-scrollbar">
+          <PostAvailable
+            src="/assets/globe.svg"
+            alt="Globe Icon"
+            type="People"
+            subText="Your Post will be global"
+            isActive={postAvailable === "people"}
+          />
+          <PostAvailable
+            src="/assets/lock.svg"
+            alt="Lock Icon"
+            type="Private"
+            subText="Your Post will be private"
+            isActive={postAvailable === "private"}
+          />
+        </div>
       </div>
       <PostForm />
     </section>
