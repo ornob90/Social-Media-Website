@@ -9,10 +9,12 @@ export const options = {
         password: {},
         displayName: {},
         userName: {},
+        forSigned: {},
       },
       async authorize(credentials, req) {
-        const { userName, displayName, email, password } = credentials || {};
-        console.log({ userName, displayName, email, password });
+        const { userName, displayName, email, password, forSigned } =
+          credentials || {};
+        console.log({ userName, displayName, email, password, forSigned });
         return null;
       },
     }),

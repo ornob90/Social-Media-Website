@@ -6,11 +6,11 @@ import { SearchParams } from "@/types/global.types";
 const CreatePost = ({ searchParams }: { searchParams: SearchParams }) => {
   const postAvailable = searchParams["post-available"] || "people";
   return (
-    <section className="w-full ">
+    <section className="w-full no-scrollbar">
       <Header header="Create a Post" />
       {/* Post Availability  */}
       <div className="overflow-auto no-scrollbar">
-        <div className="flex gap-4 min-w-[490px] overflow-scroll no-scrollbar">
+        <div className="flex gap-4 min-w-[490px] overflow-scroll ">
           <PostAvailable
             src="/assets/globe.svg"
             alt="Globe Icon"
