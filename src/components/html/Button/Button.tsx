@@ -8,7 +8,7 @@ const Button = ({
   children: React.ReactNode;
 }) => {
   return (
-    <button className={`  ${className || "bg-primary text-white"}`}>
+    <button className={` focus:scale-95 duration-300  ${className}`}>
       {children}
     </button>
   );

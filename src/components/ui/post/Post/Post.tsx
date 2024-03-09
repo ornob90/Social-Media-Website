@@ -6,7 +6,7 @@ import React from "react";
 import Comments from "./Comments/Comments";
 import CommentLink from "@/components/shared/postLinks/CommentLink";
 
-const Post = ({ value }) => {
+const Post = ({ value }: { value: number }) => {
   return (
     <div className="dark:text-white">
       {/* Header and Name  */}

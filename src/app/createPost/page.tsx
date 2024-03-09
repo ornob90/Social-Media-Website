@@ -1,3 +1,4 @@
+import PostForm from "@/components/forms/PostForm/PostForm";
 import Header from "@/components/shared/header/Header";
 import PostAvailable from "@/components/ui/post/PostAvailable/PostAvailable";
 import { SearchParams } from "@/types/global.types";
@@ -24,6 +25,7 @@ const CreatePost = ({ searchParams }: { searchParams: SearchParams }) => {
           isActive={postAvailable === "private"}
         />
       </div>
+      <PostForm />
     </section>
   );
 };
