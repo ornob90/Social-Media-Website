@@ -27,7 +27,7 @@ const Navbar = () => {
           </div>
           {/* Menu Icon  */}
           <div className="md:hidden ml-4 ">
-            <ProfilePic />
+            <ProfilePic forNav />
           </div>
         </div>
 
@@ -36,7 +36,7 @@ const Navbar = () => {
           <Search />
           <div className="md:flex items-center gap-4 hidden ">
             <Links links={navLinks} flexRow />
-            <ProfilePic />
+            <ProfilePic forNav />
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@ export enum Status {
   EXIST = "exist",
   SUCCESS = "success",
   MISSING = "missing",
+  ERROR = "error",
 }
 
 export type RegisterTypes = {
@@ -17,7 +18,8 @@ export type LoginTypes = {
 };
 
 export type CredentialsReturnType = {
-  userName: string;
+  userId: string;
   email: string;
-  image?: string;
+  photoUrl: string;
+  userName: string;
 };

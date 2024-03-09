@@ -20,7 +20,7 @@ const getConnectionString = (): string => {
 };
 
 const connectDB = async (): Promise<void> => {
-  console.log("Connection to the database...");
+  console.log("Connecting database...");
 
   // Check if there is an existing connection
   if (connection.isConnected) {
@@ -35,9 +35,11 @@ const connectDB = async (): Promise<void> => {
       dbName: process.env.DB_NAME,
     });
 
+    console.log("Database Connected");
+
     connection.isConnected = true;
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    console.log(error.message);
   }
 };
 

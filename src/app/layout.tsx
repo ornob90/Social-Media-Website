@@ -22,7 +22,7 @@ export default function RootLayout({
   sidebar: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" className="light" data-theme="light">
       <body className={`dark:bg-dark-primary ${poppins.className}`}>
         <StoreProvider>
           <Navbar />
