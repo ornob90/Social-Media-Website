@@ -1,33 +1,44 @@
 "use client";
 import Button from "@/components/html/Button/Button";
-import { RegisterTypes } from "@/types/auth.types";
+import { RegisterTypes, Status } from "@/types/auth.types";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
+import axios from "axios";
+import { useState } from "react";
 
 const RegisterForm = () => {
   const { register, handleSubmit } = useForm<RegisterTypes>();
+  const [isExist, setIsExist] = useState({ message: "" });
 
-  const onSubmit: SubmitHandler<RegisterTypes> = async (data) => {
-    const { userName, displayName, password, email } = data;
+  const onSubmit: SubmitHandler<RegisterTypes> = async (formData) => {
+    // const { userName, displayName, password, email } = data;
     try {
-      const response = await signIn("credentials", {
-        userName,
-        displayName,
-        password,
-        email,
-      });
+      const { data } = await axios.post("/api/auth/register", formData);
 
-      if (!response?.error) {
-        redirect("/");
+      if (data?.status === Status.EXIST) {
+        setIsExist({
+          message: data?.message,
+        });
+        return;
       }
 
-      if (!response?.ok) {
-        throw new Error("Network response was not ok!");
-      }
-    } catch (error: any) {
-      console.log(error.message);
+      // const response = await signIn("credentials", {
+      //   userName,
+      //   displayName,
+      //   password,
+      //   email,
+      // });
+
+      // if (!response?.error) {
+      //   redirect("/");
+      // }
+
+      // if (!response?.ok) {
+      //   throw new Error("Network response was not ok!");
+      // }
+    } catch (err: any) {
+      console.log(err.message);
     }
   };
 
@@ -58,6 +69,9 @@ const RegisterForm = () => {
         type="password"
         {...register("password")}
       />
+      {isExist?.message && (
+        <p className=" text-red-600 text-[12px]">{isExist?.message}</p>
+      )}
       <p className="text-[12px] text-dark-gray">
         By signing up, you agree to the Terms of Service and Privacy Policy,
         including Cookie Use. Others will be able to find you by email or phone

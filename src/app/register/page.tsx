@@ -6,7 +6,7 @@ import RegisterForm from "@/components/forms/RegisterForm/RegisterForm";
 
 const Register = async () => {
   const session = await getServerSession();
-
+  console.log(session);
   if (session) {
     redirect("/");
   }

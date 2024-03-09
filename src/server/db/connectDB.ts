@@ -35,11 +35,7 @@ const connectDB = async (): Promise<void> => {
       dbName: process.env.DB_NAME,
     });
 
-    connection.isConnected = db.connection.readyState === 1;
-
-    if (!connection.isConnected) {
-      connectDB();
-    }
+    connection.isConnected = true;
   } catch (error) {
     console.log(error);
   }
