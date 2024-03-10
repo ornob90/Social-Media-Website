@@ -1,32 +1,43 @@
 "use client";
 import Button from "@/components/html/Button/Button";
+import LoadingBtn from "@/components/html/Button/LoadingBtn";
 import { LoginTypes } from "@/types/auth.types";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 const LoginForm = () => {
   const { register, handleSubmit } = useForm<LoginTypes>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<LoginTypes> = async (data) => {
+    setLoading(true);
     const { email, password } = data;
     try {
       const response = await signIn("credentials", {
         email,
         password,
         forSigned: true,
+        redirect: false,
       });
 
+      console.log(!response?.error);
+
       if (!response?.error) {
+        setLoading(false);
         redirect("/");
       }
 
       if (!response?.ok) {
+        setLoading(false);
         throw new Error("Network response was not ok!");
       }
     } catch (error: any) {
+      setLoading(false);
       console.log(error.message);
     }
   };
@@ -51,7 +62,14 @@ const LoginForm = () => {
         {...register("password", { required: true })}
       />
 
-      <Button className="py-2 rounded-lg bg-primary text-white">Sign In</Button>
+      {loading ? (
+        <LoadingBtn>Signing up...</LoadingBtn>
+      ) : (
+        <Button className="py-2 rounded-lg bg-primary text-white">
+          Sign In
+        </Button>
+      )}
+
       <p className="text-[12px] text-dark-gray">
         Are you new here?
         <Link href="/register" className="text-primary font-bold underline">

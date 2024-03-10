@@ -37,15 +37,23 @@ export const options = {
         }
 
         return {
-          id: user?._id,
+          id: user?._id?.toString(),
           email: user?.email,
-          photoUrl: user?.photoUrl,
-          userName: user?.userName,
+          image: user?.photoUrl,
+          name: user?.userName,
         };
       },
     }),
   ],
-
+  callbacks: {
+    async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
+    },
+  },
   pages: {
     signIn: "/login",
   },

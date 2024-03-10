@@ -1,6 +1,6 @@
 "use client";
 import Button from "@/components/html/Button/Button";
-import { RegisterTypes, Status } from "@/types/auth.types";
+import { RegisterTypes, Status, isExistStateType } from "@/types/auth.types";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import axios from "axios";
 import { useState } from "react";
 import { redirect } from "next/navigation";
 import ErrorMessage from "@/components/shared/errorMessage/ErrorMessage";
+import LoadingBtn from "@/components/html/Button/LoadingBtn";
 
 const RegisterForm = () => {
   const {
@@ -15,8 +16,8 @@ const RegisterForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterTypes>();
-  const [isExist, setIsExist] = useState({ message: "" });
-  const [loading, setLoading] = useState(false);
+  const [isExist, setIsExist] = useState<isExistStateType>({ message: "" });
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<RegisterTypes> = async (formData) => {
     const { userName, displayName, password, email } = formData;
@@ -134,10 +135,7 @@ const RegisterForm = () => {
         number when provided
       </p>
       {loading ? (
-        <div className="py-2 bg-primary rounded-lg text-white w-full flex justify-center items-center gap-3">
-          <p className="loading loading-spinner loading-sm "></p>
-          <p>Registering user...</p>
-        </div>
+        <LoadingBtn>Registering user...</LoadingBtn>
       ) : (
         <Button className="py-2 rounded-lg bg-primary text-white">Next</Button>
       )}

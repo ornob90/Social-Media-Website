@@ -1,3 +1,5 @@
+import SignOutBtn from "@/components/html/Button/SignOutBtn";
+
 const ProfilePic = ({
   className,
   squareShape,
@@ -21,7 +23,9 @@ const ProfilePic = ({
           tabIndex={0}
           className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52 pl-4"
         >
-          <li>Sign Out</li>
+          <li>
+            <SignOutBtn />
+          </li>
         </ul>
       </div>
     );

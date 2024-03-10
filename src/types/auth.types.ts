@@ -23,3 +23,7 @@ export type CredentialsReturnType = {
   photoUrl: string;
   userName: string;
 };
+
+export type isExistStateType = {
+  message: string;
+};
