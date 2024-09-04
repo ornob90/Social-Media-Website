@@ -22,15 +22,14 @@ const LoginForm = () => {
         email,
         password,
         forSigned: true,
-        redirect: false,
       });
 
-      console.log(!response?.error);
-
       if (!response?.error) {
+        console.log(!response?.error);
         setLoading(false);
-        redirect("/");
       }
+
+      console.log(response?.ok);
 
       if (!response?.ok) {
         setLoading(false);

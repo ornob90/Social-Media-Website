@@ -31,7 +31,7 @@ const connectDB = async (): Promise<void> => {
   const mongoURI = getConnectionString();
 
   try {
-    const db: Mongoose = await mongoose.connect(mongoURI, {
+    const db: Mongoose = await mongoose.connect(process.env.DATABASE_LOCAL!, {
       dbName: process.env.DB_NAME,
     });
 

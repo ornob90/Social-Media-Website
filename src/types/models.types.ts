@@ -11,11 +11,14 @@ export enum ActivityType {
 export interface IUser extends Document {
   userName: string;
   displayName: string;
-  password: string;
   email: string;
-  photoUrl?: string;
+  password: string;
   phone?: string;
   bio?: string;
+  photoUrl?: string;
+  commentAccess?: string;
+  postViewAccess?: string;
+  friendRequestAccess?: string;
 }
 
 // Post Model

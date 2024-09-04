@@ -2,8 +2,9 @@ import connectDB from "@/server/db/connectDB";
 import User from "@/server/models/user";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import { NextAuthOptions, Session } from "next-auth";
 
-export const options = {
+export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -26,7 +27,6 @@ export const options = {
         if (!user) {
           return null;
         }
-
         const passwordMatched = await bcrypt.compare(
           password || "",
           user.password
@@ -53,8 +53,26 @@ export const options = {
       else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
+    async session({ session, token }) {
+      if (session?.user) {
+        session.user.oid = token.sub!;
+      }
+      console.log(token);
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+      }
+      console.log(user);
+      console.log(token);
+      return token;
+    },
   },
   pages: {
     signIn: "/login",
+  },
+  session: {
+    strategy: "jwt",
   },
 };
