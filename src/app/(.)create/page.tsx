@@ -1,4 +1,4 @@
-import CreatePost from "@/components/ui/createPost/CreatePost";
+import CreatePostModal from "@/components/ui/createPost/CreatePostModal";
 import { PageProps } from "@/types/global.types";
 import React from "react";
 
@@ -7,7 +7,7 @@ const Page = ({ searchParams }: PageProps) => {
     ? "people"
     : searchParams["post-available"];
 
-  return <CreatePost postAvailable={postAvailable as string} />;
+  return <CreatePostModal postAvailable={postAvailable as string} />;
 };
 
 export default Page;

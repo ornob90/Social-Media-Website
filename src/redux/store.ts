@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import navReducer from "./features/nav/navSlice";
+
+import navReducer from "../redux/features/navSlice";
+import postReducer from "../redux/features/postSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       nav: navReducer,
+      post: postReducer,
     },
   });
 };

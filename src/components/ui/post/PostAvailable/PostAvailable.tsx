@@ -12,7 +12,7 @@ const PostAvailable = ({
 }: PostAvailableType) => {
   return (
     <Link
-      href={`/createPost?post-available=${type.toLowerCase()}`}
+      href={`/create?post-available=${type.toLowerCase()}`}
       className={`flex-1 flex gap-3 py-2 ${
         isActive ? "bg-light-gray dark:bg-dark-gray rounded-md " : ""
       }`}

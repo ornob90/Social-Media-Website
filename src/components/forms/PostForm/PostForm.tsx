@@ -1,36 +1,147 @@
+"use client";
 import Button from "@/components/html/Button/Button";
-import Image from "next/image";
-import React from "react";
+import { useEdgeStore } from "@/providers/EdgeStoreProvider";
+import NextImage from "next/image";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { IoCloudUpload } from "react-icons/io5";
+import { Spinner } from "@nextui-org/spinner";
+import { Image } from "@nextui-org/image";
+import PostImageUploadProgressBar from "@/components/ui/createPost/PostImageUploadProgressBar";
 
-const PostForm = () => {
+interface PostInput {
+  content: string;
+}
+
+interface PostImagesInput {
+  url: string;
+  thumbnailUrl: string | null;
+}
+
+const PostForm = ({
+  postAvailable,
+  onCloseModal,
+}: {
+  postAvailable: string;
+  onCloseModal?: () => void;
+}) => {
+  // states
+  const [file, setFile] = useState<File | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [urls, setUrls] = useState<PostImagesInput[]>([]);
+
+  // packages hooks
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<PostInput>();
+
+  const { edgestore } = useEdgeStore();
+
+  // functions
+  const onSubmit = async (data: PostInput) => {
+    console.log(data);
+  };
+
+  const uploadFile = async () => {
+    if (!file) return;
+
+    try {
+      const res = await edgestore.publicImages.upload({
+        file,
+        onProgressChange: (progress) => setProgress(progress),
+      });
+
+      setUrls([
+        ...urls,
+        {
+          url: res.url,
+          thumbnailUrl: res.thumbnailUrl,
+        },
+      ]);
+      setFile(null);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
+  // effects
+  useEffect(() => {
+    if (file) {
+      uploadFile();
+    }
+  }, [file]);
+
+  console.log(urls);
+
   return (
-    <form className="mt-4 mb-8">
-      <textarea
-        name=""
-        id=""
-        placeholder="What's happening?"
-        className="w-full lg:w-[49%] min-h-[150px] focus:outline-none bg-light-gray pl-4 py-4 placeholder:text-base md:placeholder:text-md rounded-lg"
-      />
+    <form className="mt-4 mb-8" onSubmit={handleSubmit(onSubmit)}>
+      <div className=" relative">
+        <textarea
+          {...register("content", {
+            required: true,
+          })}
+          placeholder="What's happening?"
+          className="!w-full lg:w-[49%] min-h-[150px] focus:outline-none bg-light-gray pl-4 py-4 placeholder:text-base md:placeholder:text-md rounded-lg"
+        />
+
+        <div className="absolute bottom-[10%]  right-[2%]">
+          {[0, 100].includes(progress) ? (
+            <label htmlFor="post-file" className="  cursor-pointer">
+              <IoCloudUpload className="  text-primary/90 text-2xl" />
+            </label>
+          ) : (
+            <Spinner size="sm" className=" " />
+          )}
+        </div>
+        <input
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            e.target.files && setFile(e.target.files[0]);
+          }}
+          type="file"
+          className=" hidden"
+          id="post-file"
+        />
+      </div>
+      {errors.content && (
+        <p className=" text-red-500 text-xs">
+          Please write what you feel. This is required!
+        </p>
+      )}
+      {progress > 0 && progress < 100 && (
+        <PostImageUploadProgressBar progress={progress} />
+      )}
+
       <div className=" grid w-full h-full grid-cols-2  md:grid-cols-3 gap-4 mt-5">
-        {[1, 2, 3].map((val) => (
+        {urls?.map((url: PostImagesInput) => (
           <div
             className="relative  h-[120px] min-[400px]:h-[150px] min-[500px]:h-[170px] min-[570px]:h-[190px] md:h-[170px] lg:h-[200px] rounded-lg"
-            key={val}
+            key={url.url}
           >
             <Image
-              src="https://plus.unsplash.com/premium_photo-1663100722417-6e36673fe0ed?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src={url.url}
               alt="post image"
-              fill
-              className="rounded-lg"
+              className="rounded-lg w-full  h-full"
             />
           </div>
         ))}
       </div>
+
       <div className="w-full flex justify-end gap-4 items-center mt-7">
-        <Button className="bg-gray-200 text-black px-4 py-[7px] rounded-lg text-sm font-semibold">
+        <Button
+          onClick={onCloseModal}
+          type="button"
+          disabled={progress > 0 && progress < 100}
+          className="bg-gray-200 text-black px-4 py-[7px] rounded-lg text-sm font-semibold disabled:text-gray-600 disabled:!bg-gray-300 disabled:cursor-not-allowed"
+        >
           Discard
         </Button>
-        <Button className="bg-primary text-white px-4 py-[7px] rounded-lg text-sm font-semibold">
+        <Button
+          disabled={progress > 0 && progress < 100}
+          className="bg-primary text-white px-4 py-[7px] rounded-lg text-sm font-medium   disabled:bg-primary/60  disabled:cursor-not-allowed"
+        >
           Post
         </Button>
       </div>

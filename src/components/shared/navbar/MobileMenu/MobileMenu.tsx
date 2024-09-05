@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 
-import { useAppDispatch } from "@/lib/redux/hooks";
-import { changeMenuState } from "@/lib/redux/features/nav/navSlice";
+import { useAppDispatch } from "@/hooks/redux-types";
+import { changeMenuState } from "@/redux/features/navSlice";
 
 const MobileMenu = () => {
   const dispatch = useAppDispatch();
