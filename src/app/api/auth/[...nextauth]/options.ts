@@ -3,6 +3,8 @@ import User from "@/server/models/user";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { NextAuthOptions, Session } from "next-auth";
+import { userInfo } from "os";
+import { IUser } from "@/types/models.types";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -54,19 +56,36 @@ export const options: NextAuthOptions = {
       return baseUrl;
     },
     async session({ session, token }) {
-      if (session?.user) {
-        session.user.oid = token.sub!;
+      if (token?.user) {
+        const { password, ...restUser } = token.user as IUser;
+
+        session.user = restUser;
       }
-      console.log(token);
+      // console.log(token);
       return session;
     },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        await connectDB();
+        const userInfo = await User.findById(user.id);
+        const { password, ...restUserData } = userInfo;
+        token.user = restUserData;
       }
-      console.log(user);
-      console.log(token);
+      // console.log(user);
+      // console.log(token);
       return token;
+    },
+    async signIn({ user, account }) {
+      if (account?.provider === "credentials") {
+        await connectDB();
+
+        const userInfo = await User.findOne({ _id: user.id });
+
+        console.log({ id: user.id });
+
+        return userInfo;
+      } else return true;
     },
   },
   pages: {

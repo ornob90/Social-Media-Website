@@ -13,7 +13,7 @@ interface PostInput {
   content: string;
 }
 
-interface PostImagesInput {
+export interface ImageUrl {
   url: string;
   thumbnailUrl: string | null;
 }
@@ -28,7 +28,7 @@ const PostForm = ({
   // states
   const [file, setFile] = useState<File | null>(null);
   const [progress, setProgress] = useState(0);
-  const [urls, setUrls] = useState<PostImagesInput[]>([]);
+  const [urls, setUrls] = useState<ImageUrl[]>([]);
 
   // packages hooks
   const {
@@ -41,8 +41,25 @@ const PostForm = ({
   const { edgestore } = useEdgeStore();
 
   // functions
+
+  const makeFilesPermanent = async () => {
+    try {
+      for (const url of urls) {
+        await edgestore.publicImages.confirmUpload({
+          url: url.url,
+        });
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
   const onSubmit = async (data: PostInput) => {
-    console.log(data);
+    try {
+      await makeFilesPermanent();
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
 
   const uploadFile = async () => {
@@ -51,6 +68,9 @@ const PostForm = ({
     try {
       const res = await edgestore.publicImages.upload({
         file,
+        options: {
+          temporary: true,
+        },
         onProgressChange: (progress) => setProgress(progress),
       });
 
@@ -115,7 +135,7 @@ const PostForm = ({
       )}
 
       <div className=" grid w-full h-full grid-cols-2  md:grid-cols-3 gap-4 mt-5">
-        {urls?.map((url: PostImagesInput) => (
+        {urls?.map((url: ImageUrl) => (
           <div
             className="relative  h-[120px] min-[400px]:h-[150px] min-[500px]:h-[170px] min-[570px]:h-[190px] md:h-[170px] lg:h-[200px] rounded-lg"
             key={url.url}

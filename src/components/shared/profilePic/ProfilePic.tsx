@@ -1,14 +1,21 @@
+import AddProfilePicBtn from "@/components/html/Button/AddProfilePicBtn";
 import SignOutBtn from "@/components/html/Button/SignOutBtn";
+import { Image } from "@nextui-org/image";
+import { IoIosAddCircle } from "react-icons/io";
+
+interface ProfilePicProps {
+  className?: string;
+  squareShape?: boolean;
+  forNav?: boolean;
+  addPlusBtn?: boolean;
+}
 
 const ProfilePic = ({
   className,
   squareShape,
   forNav,
-}: {
-  className?: string;
-  squareShape?: boolean;
-  forNav?: boolean;
-}) => {
+  addPlusBtn,
+}: ProfilePicProps) => {
   if (forNav) {
     return (
       <div className="dropdown dropdown-end hover:bg-white focus-visible:outline-none">
@@ -32,12 +39,14 @@ const ProfilePic = ({
   }
 
   return (
-    <p
-      className={`border-2 border-black  ${
+    <div
+      className={`border-2 relative border-black  ${
         squareShape ? " rounded-md" : "rounded-full"
       } 
          ${className || "w-[30px] h-[30px] md:h-[33px] md:w-[33px]"}`}
-    ></p>
+    >
+      <AddProfilePicBtn />
+    </div>
   );
 };
 
