@@ -5,7 +5,7 @@ const ProfileHeader = () => {
   return (
     <header className="w-full flex flex-col sm:flex-row  gap-4 sm:gap-0 justify-between items-center">
       <div className="flex flex-col sm:flex-row items-center gap-2">
-        <ProfilePic className="w-[80px] h-[80px]" />
+        <ProfilePic className="w-[80px] h-[80px]" addPlusBtn />
         <div className="flex flex-col items-center sm:items-start">
           <h1 className="text-lg font-bold">Ava hart</h1>
           <p className="text-dark-gray text-sm">Designer.Creator.Explorer</p>

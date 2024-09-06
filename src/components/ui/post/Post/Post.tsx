@@ -5,8 +5,9 @@ import Image from "next/image";
 import React from "react";
 import Comments from "./Comments/Comments";
 import CommentLink from "@/components/shared/postLinks/CommentLink";
+import { Post as PostInterface } from "@/types/post.types";
 
-const Post = ({ value }: { value: number }) => {
+const Post = ({ post }: { post: PostInterface }) => {
   return (
     <div className="dark:text-white">
       {/* Header and Name  */}
@@ -19,18 +20,11 @@ const Post = ({ value }: { value: number }) => {
       </header>
       {/* Content  */}
       <div>
-        <p className="lg:w-[90%] mt-3 text-sm">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ex
-          consequuntur nulla fuga fugit. Necessitatibus quisquam, sunt est
-          soluta facilis ipsa tenetur nemo sed provident veniam enim, cupiditate
-          perferendis aspernatur similique itaque quia ex fugit nobis aperiam
-          eligendi dolor aut nostrum? Eaque laboriosam cum, iure eligendi
-          necessitatibus perspiciatis id blanditiis magnam.
-        </p>
-        {value % 3 === 0 && (
+        <p className="lg:w-[90%] mt-3 text-sm">{post.content}</p>
+        {post.images?.length > 0 && (
           <div className="relative w-full lg:w-[90%] h-[350px] md:h-[400px] lg:h-[450px] object-cover mt-5 rounded-md">
             <Image
-              src="https://images.unsplash.com/photo-1521575107034-e0fa0b594529?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG9zdHxlbnwwfHwwfHx8MA%3D%3D"
+              src={post.images[0]}
               fill
               alt="Alternate Image"
               className="rounded-md "
@@ -48,9 +42,9 @@ const Post = ({ value }: { value: number }) => {
         <Share />
       </div>
       {/* TODO  */}
-      <div className="">
+      {/* <div className="">
         <Comments />
-      </div>
+      </div> */}
     </div>
   );
 };

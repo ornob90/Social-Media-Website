@@ -8,6 +8,7 @@ import { IoCloudUpload } from "react-icons/io5";
 import { Spinner } from "@nextui-org/spinner";
 import { Image } from "@nextui-org/image";
 import PostImageUploadProgressBar from "@/components/ui/createPost/PostImageUploadProgressBar";
+import { useSession } from "next-auth/react";
 
 interface PostInput {
   content: string;
@@ -37,11 +38,10 @@ const PostForm = ({
     reset,
     formState: { errors },
   } = useForm<PostInput>();
-
   const { edgestore } = useEdgeStore();
+  const session = useSession();
 
   // functions
-
   const makeFilesPermanent = async () => {
     try {
       for (const url of urls) {

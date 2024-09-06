@@ -1,10 +1,11 @@
 import React from "react";
+import { Button } from "@nextui-org/button";
 
 const FollowBtn = () => {
   return (
-    <button className="rounded-lg text-black bg-light-gray px-4 py-2 text-sm">
+    <Button className="rounded-lg text-black bg-light-gray px-4 py-2 text-sm">
       Follow
-    </button>
+    </Button>
   );
 };
 

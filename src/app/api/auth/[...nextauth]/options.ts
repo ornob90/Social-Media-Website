@@ -5,6 +5,9 @@ import bcrypt from "bcrypt";
 import { NextAuthOptions, Session } from "next-auth";
 import { userInfo } from "os";
 import { IUser } from "@/types/models.types";
+import jwt from "jsonwebtoken";
+
+export const SESSION_EXPIRE_TIME = 60 * 60 * 24 * 7;
 
 export const options: NextAuthOptions = {
   providers: [
@@ -57,9 +60,28 @@ export const options: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token?.user) {
-        const { password, ...restUser } = token.user as IUser;
+        const { password, ...restUser } = token.user as IUser & {
+          apiToken: string;
+        };
+
+        const payload = {
+          name: restUser.userName,
+          email: restUser.email,
+          id: restUser._id,
+        };
+
+        const apiToken = jwt.sign(payload, process.env.JWT_SECRET_KEY!, {
+          expiresIn: "7d",
+        });
+
+        console.log(apiToken);
+
+        restUser.apiToken = apiToken;
+
+        console.log(restUser);
 
         session.user = restUser;
+        // session.expires = "7d";
       }
       // console.log(token);
       return session;
@@ -70,7 +92,10 @@ export const options: NextAuthOptions = {
         await connectDB();
         const userInfo = await User.findById(user.id);
         const { password, ...restUserData } = userInfo;
+        console.log({ userInfo });
         token.user = restUserData;
+        token.iat = Math.floor(Date.now() / 1000);
+        token.exp = Math.floor(Date.now() / 1000) + SESSION_EXPIRE_TIME;
       }
       // console.log(user);
       // console.log(token);
@@ -82,7 +107,7 @@ export const options: NextAuthOptions = {
 
         const userInfo = await User.findOne({ _id: user.id });
 
-        console.log({ id: user.id });
+        // console.log({ id: user.id });
 
         return userInfo;
       } else return true;
@@ -93,5 +118,9 @@ export const options: NextAuthOptions = {
   },
   session: {
     strategy: "jwt",
+    maxAge: SESSION_EXPIRE_TIME,
+  },
+  jwt: {
+    maxAge: SESSION_EXPIRE_TIME,
   },
 };

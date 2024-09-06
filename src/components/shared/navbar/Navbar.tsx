@@ -8,38 +8,40 @@ import { navLinks } from "@/data/navLinks";
 
 const Navbar = () => {
   return (
-    <nav className="dark:bg-dark-primary mx-auto w-full min-h-[50px] py-3  relative">
-      <div className="max-w-[1512px] grid grid-cols-1 md:grid-cols-6 w-[90%] mx-auto items-center gap-4 md:gap-0 ">
-        {/* Title and Logo */}
-        <div className="flex items-center gap-2  justify-between md:col-span-1  ">
-          {/* Header  */}
-          <div className="flex items-center h-full text-sm md:text-base justify-between w-full md:w-max ">
-            <div className="flex items-center gap-2">
-              <MobileMenu />
-              <p className="font-bold text-xl dark:text-white flex items-center ">
-                Wave<span className="text-primary">Chat</span>
-              </p>
-            </div>
+    <nav className="fixed top-0 w-full z-50  bg-transparent h-max ">
+      <section className="dark:bg-dark-primary shadow-sm bg-white mx-auto w-full min-h-[50px] py-1 mb-4  relative ">
+        <div className="max-w-[1512px] grid grid-cols-1 md:grid-cols-6 w-[90%] mx-auto items-center gap-4 md:gap-0 ">
+          {/* Title and Logo */}
+          <div className="flex items-center gap-2  justify-between md:col-span-1  ">
+            {/* Header  */}
+            <div className="flex items-center h-full text-sm md:text-base justify-between w-full md:w-max ">
+              <div className="flex items-center gap-2">
+                <MobileMenu />
+                <p className="font-bold text-xl dark:text-white flex items-center ">
+                  Wave<span className="text-primary">Chat</span>
+                </p>
+              </div>
 
-            <div className="md:hidden">
+              <div className="md:hidden">
+                <Links links={navLinks} flexRow />
+              </div>
+            </div>
+            {/* Menu Icon  */}
+            <div className="md:hidden ml-4 ">
+              <ProfilePic forNav />
+            </div>
+          </div>
+
+          {/* Search and  Nav Links for Desktop*/}
+          <div className="flex items-center  justify-end gap-4 md:col-span-5">
+            <Search />
+            <div className="md:flex items-center gap-4 hidden ">
               <Links links={navLinks} flexRow />
+              <ProfilePic forNav />
             </div>
           </div>
-          {/* Menu Icon  */}
-          <div className="md:hidden ml-4 ">
-            <ProfilePic forNav />
-          </div>
         </div>
-
-        {/* Search and  Nav Links for Desktop*/}
-        <div className="flex items-center  justify-end gap-4 md:col-span-5">
-          <Search />
-          <div className="md:flex items-center gap-4 hidden ">
-            <Links links={navLinks} flexRow />
-            <ProfilePic forNav />
-          </div>
-        </div>
-      </div>
+      </section>
     </nav>
   );
 };
