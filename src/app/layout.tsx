@@ -5,7 +5,7 @@ import { Poppins } from "next/font/google";
 import StoreProvider from "@/providers/StoreProvider";
 import { EdgeStoreProvider } from "@/providers/EdgeStoreProvider";
 import NextAuthSessionProvider from "@/providers/NextAuthSessionProvider";
-import TenStackProvider from "@/providers/TenstackProvider";
+import TenStackProvider from "@/providers/TenStackProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],

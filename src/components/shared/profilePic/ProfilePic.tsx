@@ -1,3 +1,4 @@
+"use client";
 import AddProfilePicBtn from "@/components/html/Button/AddProfilePicBtn";
 import SignOutBtn from "@/components/html/Button/SignOutBtn";
 import { Image } from "@nextui-org/image";
@@ -8,6 +9,7 @@ interface ProfilePicProps {
   squareShape?: boolean;
   forNav?: boolean;
   addPlusBtn?: boolean;
+  url?: string | undefined | null;
 }
 
 const ProfilePic = ({
@@ -15,6 +17,7 @@ const ProfilePic = ({
   squareShape,
   forNav,
   addPlusBtn,
+  url,
 }: ProfilePicProps) => {
   if (forNav) {
     return (
@@ -40,11 +43,16 @@ const ProfilePic = ({
 
   return (
     <div
-      className={`border-2 relative border-black  ${
+      className={`border border-gray-200 relative   ${
         squareShape ? " rounded-md" : "rounded-full"
       } 
          ${className || "w-[30px] h-[30px] md:h-[33px] md:w-[33px]"}`}
     >
+      <Image
+        src="/assets/blank-dp.webp"
+        alt="Blank DP"
+        className=" w-full h-full rounded-full"
+      />
       {addPlusBtn && <AddProfilePicBtn />}
     </div>
   );

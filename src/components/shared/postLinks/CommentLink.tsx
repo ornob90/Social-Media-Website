@@ -1,7 +1,12 @@
+import { formatNumber } from "@/utils/formatNumber";
 import Image from "next/image";
 import React from "react";
 
-const CommentLink = () => {
+export interface CommentLinkProp {
+  commentsCount: number;
+}
+
+const CommentLink = ({ commentsCount }: CommentLinkProp) => {
   return (
     <div className="flex gap-2 cursor-pointer">
       <Image
@@ -10,7 +15,7 @@ const CommentLink = () => {
         height={20}
         alt="Like Icon"
       />
-      <p>10k</p>
+      <p>{formatNumber(commentsCount || 0)}</p>
     </div>
   );
 };

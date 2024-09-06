@@ -4,11 +4,13 @@ import React from "react";
 
 const WhoToFollow = () => {
   return (
-    <section className="flex flex-col gap-y-5 p-4 rounded-xl bg-white">
+    <section className="flex flex-col gap-y-8 p-4 rounded-xl bg-white">
       <h2 className=" text-xl font-semibold">Who to follow</h2>
-      {[1, 2, 3].map((v) => (
-        <UserToFollow key={v} />
-      ))}
+      <section className=" flex flex-col gap-y-6">
+        {[1, 2, 3].map((v) => (
+          <UserToFollow key={v} />
+        ))}
+      </section>
     </section>
   );
 };

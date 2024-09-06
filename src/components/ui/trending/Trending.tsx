@@ -2,11 +2,13 @@ import React from "react";
 
 const Trending = () => {
   return (
-    <section className=" bg-white p-4 rounded-xl flex flex-col gap-y-3">
+    <section className=" bg-white  p-4 rounded-xl flex flex-col gap-y-6">
       <h2 className=" text-xl font-semibold">Trending Posts</h2>
-      {[1, 2, 3, 4].map((v) => (
-        <Hashtag key={v} />
-      ))}
+      <section className="flex flex-col gap-y-4">
+        {[1, 2, 3, 4].map((v) => (
+          <Hashtag key={v} />
+        ))}
+      </section>
     </section>
   );
 };

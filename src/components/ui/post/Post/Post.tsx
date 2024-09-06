@@ -12,10 +12,12 @@ const Post = ({ post }: { post: PostInterface }) => {
     <div className="dark:text-white">
       {/* Header and Name  */}
       <header className="flex  items-center gap-2 h-max py-2 ">
-        <ProfilePic />
+        <ProfilePic className="size-9" url={post?.user?.photoUrl} />
         <ul className="flex flex-col justify-between">
-          <li className="font-semibold">Julie Chang</li>
-          <li className="text-dark-gray text-sm">@juliec . 11m</li>
+          <li className="font-semibold">{post?.user?.displayName}</li>
+          <li className="text-dark-gray text-sm">
+            @{post?.user?.userName} . 11m
+          </li>
         </ul>
       </header>
       {/* Content  */}
@@ -37,14 +39,18 @@ const Post = ({ post }: { post: PostInterface }) => {
       {/* Like Share Comment  */}
 
       <div className="flex gap-10 text-dark-gray mt-3 ">
-        <Like />
-        <CommentLink />
+        <Like
+          likesCount={post.likesCount}
+          postId={post._id}
+          isLiked={post.isLiked}
+        />
+        <CommentLink commentsCount={post.commentsCount} />
         <Share />
       </div>
       {/* TODO  */}
-      {/* <div className="">
+      <div className="">
         <Comments />
-      </div> */}
+      </div>
     </div>
   );
 };

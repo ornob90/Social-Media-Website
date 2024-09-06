@@ -25,11 +25,7 @@ export default async function Home() {
           </>
         }
       >
-        <Posts
-          totalPosts={totalPosts}
-          initialPosts={posts}
-          fetchPosts={getNewsFeedPosts}
-        />
+        <Posts initialPosts={posts} fetchPosts={getNewsFeedPosts} />
       </Suspense>
     </main>
   );

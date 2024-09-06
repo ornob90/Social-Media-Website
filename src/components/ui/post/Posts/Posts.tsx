@@ -6,10 +6,12 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { getNewsFeedPosts } from "@/actions/post/post.actions";
 import PostSkeleton from "@/components/skeletons/PostSkeleton";
 import { useInView } from "react-intersection-observer";
+import { useDispatch, useSelector } from "react-redux";
+import { addPosts, PostInitialState } from "@/redux/features/postSlice";
 
 interface PostsProp {
   initialPosts: PostInterface[];
-  totalPosts: number;
+  totalPosts?: number;
   fetchPosts: any;
 }
 
@@ -17,6 +19,10 @@ const Posts = ({ initialPosts, fetchPosts }: PostsProp) => {
   // states
 
   // redux hooks
+  const { posts } = useSelector(
+    (state: { post: PostInitialState }) => state.post
+  );
+  const dispatch = useDispatch();
 
   // custom hooks
 
@@ -28,6 +34,7 @@ const Posts = ({ initialPosts, fetchPosts }: PostsProp) => {
       queryKey: ["posts"],
       queryFn: async ({ pageParam = 1 }) => {
         const result = await fetchPosts(pageParam as number);
+
         return result.posts;
       },
       initialData: {
@@ -48,23 +55,28 @@ const Posts = ({ initialPosts, fetchPosts }: PostsProp) => {
 
   // effects
   useEffect(() => {
-    console.log({ inView });
+    // console.log({ inView });
     if (inView) {
       fetchNextPage();
     }
   }, [inView]);
 
-  console.log(data);
+  useEffect(() => {
+    const postsToSave: PostInterface[] = [];
+
+    data?.pages?.map((group) => {
+      group?.map((post) => {
+        postsToSave.push(post);
+      });
+    });
+
+    dispatch(addPosts(postsToSave));
+  }, [data]);
 
   return (
     <section className="flex flex-col gap-[60px]">
-      {data?.pages?.map((group, i) => (
-        <React.Fragment key={i}>
-          {Array.isArray(group) &&
-            group?.map((post: PostInterface) => (
-              <Post post={post} key={post._id} />
-            ))}
-        </React.Fragment>
+      {posts?.map((post) => (
+        <Post post={post} key={post._id} />
       ))}
 
       <div ref={ref}>

@@ -1,8 +1,16 @@
 import React from "react";
 
-const Header = ({ header }: { header: string }) => {
+const Header = ({
+  header,
+  className,
+}: {
+  header: string;
+  className?: string;
+}) => {
   return (
-    <h1 className="font-bold text-2xl lg:text-[28px] mb-7 dark:text-white">
+    <h1
+      className={`font-bold text-2xl lg:text-[28px] mb-7 dark:text-white ${className}`}
+    >
       {header}
     </h1>
   );

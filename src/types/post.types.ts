@@ -6,15 +6,22 @@ export type PostAvailableType = {
   isActive: boolean;
 };
 
+interface PostUser {
+  displayName: string;
+  userName: string;
+  photoUrl?: string;
+}
+
 export interface Post {
   _id: string;
-  user: string;
+  user: PostUser;
   content: string;
   images: string[];
   privacy: "public" | "private";
   likesCount: number;
   commentsCount: number;
   sharesCount: number;
+  isLiked: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }

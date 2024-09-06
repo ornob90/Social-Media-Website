@@ -16,7 +16,7 @@ const useAxios = (restOptions?: AxiosInstanceType) => {
 
   // Create an Axios instance with default and provided options
   const axiosInstance = axios.create({
-    baseURL: process.env.NEXT_AUTH_BASE_URL,
+    baseURL: process.env.NEXT_PUBLIC_BASE_URL!,
     ...options,
   });
 
