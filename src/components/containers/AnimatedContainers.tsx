@@ -10,11 +10,12 @@ interface AnimatedContainerProps extends MotionProps {
 const AnimatedContainer: React.FC<AnimatedContainerProps> = ({
   children,
   className = "",
-  initial = { opacity: 0, y: -50 }, // Start slightly above
+  initial = { opacity: 0, y: -25 }, // Start slightly above
   animate = { opacity: 1, y: 0 }, // Move to its required position
-  exit = { opacity: 0, y: 50 }, // Move down and disappear
+  exit = { opacity: 0, y: -25 }, // Move down and disappear
   transition = { duration: 0.3 }, // Control the speed of the animation
   isVisible = true,
+  layout = false,
   ...rest
 }) => {
   return (
@@ -26,6 +27,7 @@ const AnimatedContainer: React.FC<AnimatedContainerProps> = ({
           animate={animate}
           exit={exit}
           transition={transition}
+          layout={layout}
           {...rest} // Spread any additional props to motion.div
         >
           {children}

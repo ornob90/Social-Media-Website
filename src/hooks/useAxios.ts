@@ -8,7 +8,10 @@ export type AxiosInstanceType = {
 };
 
 const useAxios = (restOptions?: AxiosInstanceType) => {
-  const { axiosOptions, isPrivate } = restOptions || {};
+  const { axiosOptions, isPrivate: isPrivateFromParam } = restOptions || {};
+
+  const isPrivate =
+    typeof isPrivateFromParam === "boolean" ? isPrivateFromParam : true;
 
   const session = useSession();
   const token = session.data?.user?.apiToken;

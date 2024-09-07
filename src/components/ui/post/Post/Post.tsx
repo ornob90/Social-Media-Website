@@ -13,7 +13,7 @@ const Post = ({ post }: { post: PostInterface }) => {
   const [showComments, setShowComments] = useState(false);
 
   return (
-    <AnimatedContainer className="dark:text-white">
+    <AnimatedContainer layout={false} className="dark:text-white">
       {/* Header and Name  */}
       <header className="flex  items-center gap-2 h-max py-2 ">
         <ProfilePic className="size-9" url={post?.user?.photoUrl} />
@@ -58,7 +58,7 @@ const Post = ({ post }: { post: PostInterface }) => {
       {/* TODO  */}
 
       <AnimatedContainer isVisible={showComments} exit={{ opacity: 0, y: -50 }}>
-        <Comments postId={post._id} />
+        <Comments post={post} />
       </AnimatedContainer>
     </AnimatedContainer>
   );

@@ -13,8 +13,12 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { CommentInterface } from "@/types/reactions.types";
 import { Spinner } from "@nextui-org/spinner";
+import { Post as PostInterface } from "@/types/post.types";
 
-const Comments = ({ postId }: { postId: string }) => {
+const Comments = ({ post }: { post: PostInterface }) => {
+  // constants
+  const postId = post._id;
+
   // states
 
   // redux hooks
@@ -29,7 +33,7 @@ const Comments = ({ postId }: { postId: string }) => {
   const axiosInstance = useAxios();
   const { data, isSuccess, fetchNextPage, isPending, hasNextPage } =
     useInfiniteQuery({
-      queryKey: ["Commetns", postId],
+      queryKey: ["Comments", postId],
       queryFn: async ({ pageParam = 1 }) => {
         const result = await axiosInstance.get(
           `/reactions/comments/${postId}?page=${pageParam}&limit=10`
@@ -38,7 +42,7 @@ const Comments = ({ postId }: { postId: string }) => {
       },
       initialPageParam: 1,
       getNextPageParam(lastPage, allPages) {
-        return lastPage && lastPage?.length > 0
+        return lastPage && lastPage?.length === 10
           ? allPages.length + 1
           : undefined;
       },
@@ -71,7 +75,7 @@ const Comments = ({ postId }: { postId: string }) => {
   return (
     <div className="mt-10">
       <Header header={`Comments | ${15}K`} className="!text-lg" />
-      <CommentForm />
+      <CommentForm post={post} />
 
       {isPending && comments[postId]?.length === 0 ? (
         <section className="flex flex-col gap-y-4">
@@ -83,9 +87,15 @@ const Comments = ({ postId }: { postId: string }) => {
         <>
           <div className="flex flex-col gap-4">
             {Array.isArray(comments[postId]) &&
-              comments[postId].map((comment: CommentInterface) => (
-                <Comment key={comment._id} comment={comment} />
-              ))}
+              comments[postId].map(
+                (comment: CommentInterface, commentIndex) => (
+                  <Comment
+                    key={comment._id}
+                    comment={comment}
+                    commentIndex={commentIndex}
+                  />
+                )
+              )}
           </div>
           {hasNextPage && (
             <div className="flex mt-8 items-center justify-center">

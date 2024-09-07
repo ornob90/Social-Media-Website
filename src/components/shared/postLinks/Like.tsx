@@ -49,7 +49,7 @@ const Like = ({ likesCount, isLiked, postId, postedBy }: LikeProps) => {
     isSuccess: isDeleteSuccess,
   } = useMutation({
     mutationFn: async () => {
-      const reactionFrom = session?.data?.user?._doc?._id;
+      const reactionFrom = session?.data?.user?._id;
       const reactedTo = postedBy;
 
       const res = await axiosInstance.delete(
@@ -77,10 +77,10 @@ const Like = ({ likesCount, isLiked, postId, postedBy }: LikeProps) => {
       deleteLike();
     } else {
       addLike({
-        user: session?.data?.user?._doc?._id,
+        user: session?.data?.user?._id,
         type: "like",
         post: postId,
-        reactionFrom: session?.data?.user?._doc?._id,
+        reactionFrom: session?.data?.user?._id,
         reactedTo: postedBy,
       });
     }

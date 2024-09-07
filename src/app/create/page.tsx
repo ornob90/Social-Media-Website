@@ -1,6 +1,6 @@
 import CreatePost from "@/components/ui/createPost/CreatePost";
 import { PageProps } from "@/types/global.types";
-import React from "react";
+import React, { useState } from "react";
 
 const Page = ({ searchParams }: PageProps) => {
   const postAvailable = !searchParams

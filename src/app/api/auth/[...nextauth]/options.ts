@@ -91,8 +91,9 @@ export const options: NextAuthOptions = {
         token.id = user.id;
         await connectDB();
         const userInfo = await User.findById(user.id);
-        const { password, ...restUserData } = userInfo;
-        console.log({ userInfo });
+        console.log(userInfo);
+        const { password, ...restUserData } = userInfo._doc;
+
         token.user = restUserData;
         token.iat = Math.floor(Date.now() / 1000);
         token.exp = Math.floor(Date.now() / 1000) + SESSION_EXPIRE_TIME;

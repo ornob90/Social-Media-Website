@@ -1,3 +1,5 @@
+import { User } from "./user.types";
+
 export type PostAvailableType = {
   type: "People" | "Private";
   subText: string;
@@ -6,16 +8,9 @@ export type PostAvailableType = {
   isActive: boolean;
 };
 
-interface PostUser {
-  _id: string;
-  displayName: string;
-  userName: string;
-  photoUrl?: string;
-}
-
 export interface Post {
   _id: string;
-  user: PostUser;
+  user: User;
   content: string;
   images: string[];
   privacy: "public" | "private";

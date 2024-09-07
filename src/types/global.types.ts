@@ -25,3 +25,8 @@ export type ParamsSearchParams = {
   params: { slug: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 };
+
+export enum ConfirmModalBtnEnum {
+  CONFIRM = "confirm",
+  CANCEL = "cancel",
+}

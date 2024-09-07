@@ -9,6 +9,8 @@ import PostSkeleton from "@/components/skeletons/PostSkeleton";
 export default async function Home() {
   const session = await getServerSession(options);
 
+  console.log(session);
+
   const { totalPosts, posts } = (await getNewsFeedPosts(1)) || {};
 
   return (

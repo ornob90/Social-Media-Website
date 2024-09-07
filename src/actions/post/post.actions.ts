@@ -7,7 +7,7 @@ export const getNewsFeedPosts = async (page: number) => {
   try {
     const session = await getServerSession();
     const token = session?.user?.apiToken;
-    const user = session?.user?._doc;
+    const user = session?.user;
 
     const response = await fetch(
       process.env.NEXT_AUTH_BASE_URL +
