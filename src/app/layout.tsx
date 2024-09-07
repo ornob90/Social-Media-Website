@@ -40,7 +40,7 @@ export default function RootLayout({
                   <div className="lg:col-span-2 relative h-auto ">
                     {sidebar}
                   </div>
-                  <div className="w-full md:w-[80%] lg:w-full mx-auto lg:col-span-5">
+                  <div className="w-full  md:w-[80%] lg:w-full mx-auto lg:col-span-5">
                     {children}
                   </div>
                   <div className="lg:col-span-2  ">{trending}</div>

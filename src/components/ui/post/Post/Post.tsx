@@ -2,14 +2,18 @@ import Like from "@/components/shared/postLinks/Like";
 import Share from "@/components/shared/postLinks/Share";
 import ProfilePic from "@/components/shared/profilePic/ProfilePic";
 import Image from "next/image";
-import React from "react";
+import React, { ReactNode, useState } from "react";
 import Comments from "./Comments/Comments";
 import CommentLink from "@/components/shared/postLinks/CommentLink";
 import { Post as PostInterface } from "@/types/post.types";
+import AnimatedContainer from "@/components/containers/AnimatedContainers";
 
 const Post = ({ post }: { post: PostInterface }) => {
+  // states
+  const [showComments, setShowComments] = useState(false);
+
   return (
-    <div className="dark:text-white">
+    <AnimatedContainer className="dark:text-white">
       {/* Header and Name  */}
       <header className="flex  items-center gap-2 h-max py-2 ">
         <ProfilePic className="size-9" url={post?.user?.photoUrl} />
@@ -43,15 +47,20 @@ const Post = ({ post }: { post: PostInterface }) => {
           likesCount={post.likesCount}
           postId={post._id}
           isLiked={post.isLiked}
+          postedBy={post.user?._id}
         />
-        <CommentLink commentsCount={post.commentsCount} />
+        <CommentLink
+          onClick={() => setShowComments(!showComments)}
+          commentsCount={post.commentsCount}
+        />
         <Share />
       </div>
       {/* TODO  */}
-      <div className="">
-        <Comments />
-      </div>
-    </div>
+
+      <AnimatedContainer isVisible={showComments} exit={{ opacity: 0, y: -50 }}>
+        <Comments postId={post._id} />
+      </AnimatedContainer>
+    </AnimatedContainer>
   );
 };
 

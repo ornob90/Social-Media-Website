@@ -17,7 +17,7 @@ export default async function Home() {
       <Suspense
         fallback={
           <>
-            <section className="flex flex-col gap-y-10">
+            <section className="flex bg-white flex-col gap-y-10">
               {[1, 2, 3, 4, 5].map((p) => (
                 <PostSkeleton key={p} />
               ))}

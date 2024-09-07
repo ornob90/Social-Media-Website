@@ -3,13 +3,12 @@ import axios, { CreateAxiosDefaults } from "axios";
 import { useSession } from "next-auth/react";
 
 export type AxiosInstanceType = {
-  options?: CreateAxiosDefaults;
+  axiosOptions?: CreateAxiosDefaults;
   isPrivate: boolean;
-  server?: "auth" | "property";
 };
 
 const useAxios = (restOptions?: AxiosInstanceType) => {
-  const { options, isPrivate, server } = restOptions || {};
+  const { axiosOptions, isPrivate } = restOptions || {};
 
   const session = useSession();
   const token = session.data?.user?.apiToken;
@@ -17,7 +16,7 @@ const useAxios = (restOptions?: AxiosInstanceType) => {
   // Create an Axios instance with default and provided options
   const axiosInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BASE_URL!,
-    ...options,
+    ...axiosOptions,
   });
 
   // Interceptor to add authorization header if token is present and request is private

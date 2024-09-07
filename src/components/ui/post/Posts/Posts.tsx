@@ -79,9 +79,11 @@ const Posts = ({ initialPosts, fetchPosts }: PostsProp) => {
         <Post post={post} key={post._id} />
       ))}
 
-      <div ref={ref}>
-        <PostSkeleton />
-      </div>
+      <section ref={ref} className="flex flex-col gap-y-10">
+        {[1, 2, 3, 4, 5].map((p) => (
+          <PostSkeleton key={p} />
+        ))}
+      </section>
     </section>
   );
 };

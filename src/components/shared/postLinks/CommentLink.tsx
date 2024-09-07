@@ -4,11 +4,12 @@ import React from "react";
 
 export interface CommentLinkProp {
   commentsCount: number;
+  onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }
 
-const CommentLink = ({ commentsCount }: CommentLinkProp) => {
+const CommentLink = ({ commentsCount, onClick }: CommentLinkProp) => {
   return (
-    <div className="flex gap-2 cursor-pointer">
+    <div onClick={onClick} className="flex gap-2 cursor-pointer">
       <Image
         src="/assets/message-gray.svg"
         width={20}

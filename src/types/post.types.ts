@@ -7,6 +7,7 @@ export type PostAvailableType = {
 };
 
 interface PostUser {
+  _id: string;
   displayName: string;
   userName: string;
   photoUrl?: string;

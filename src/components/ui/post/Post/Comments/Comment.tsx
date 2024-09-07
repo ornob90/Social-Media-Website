@@ -1,4 +1,6 @@
+import AnimatedContainer from "@/components/containers/AnimatedContainers";
 import ProfilePic from "@/components/shared/profilePic/ProfilePic";
+import { CommentInterface } from "@/types/reactions.types";
 import { Button } from "@nextui-org/button";
 import { Textarea } from "@nextui-org/input";
 import { useState } from "react";
@@ -6,21 +8,25 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { MdOutlineDelete } from "react-icons/md";
 import { MdOutlineEditOff } from "react-icons/md";
 
-const Comment = () => {
+export interface CommentProps {
+  comment: CommentInterface;
+}
+
+const Comment = ({ comment }: CommentProps) => {
   const [isEdit, setIsEdit] = useState(false);
 
   return (
-    <div className="grid grid-cols-12 items-start  py-2 w-[90%]">
-      <div className="col-span-1 w-max">
+    <AnimatedContainer className="md:grid flex   md:grid-cols-12 items-start gap-x-2 sm:gap-x-4 md:gap-x-4 lg:gap-x-8  py-2 w-[90%]">
+      <div className="md:col-span-1 w-max">
         <ProfilePic />
       </div>
-      <ul className="col-span-11 flex flex-col justify-between">
+      <ul className=" max-md:flex-1 md:col-span-11 flex flex-col justify-between">
         <li className="flex justify-between ">
-          <div className="font-semibold mb-3">
+          <div className=" flex flex-col md:flex-row items-start md:items-center gap-x-2 font-semibold mb-3">
             Julie Chang
-            <span className="text-dark-gray text-[12px] ml-2  font-normal">
+            <p className="text-dark-gray text-[12px] font-normal">
               2 weeks ago
-            </span>
+            </p>
           </div>
           <div className=" flex  justify-end gap-x-3">
             {isEdit && (
@@ -48,13 +54,7 @@ const Comment = () => {
               labelPlacement="inside"
               size="sm"
               className="-mt-2  border-primary !bg-transparent focus:!border-b-gray-200 focus:!outline-none focus-within:!outline-none focus:!border-none"
-              value={`Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt corporis
-          neque reiciendis fugiat labore tempora libero nulla cum. Porro,
-          deleniti. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Sunt corporis neque reiciendis fugiat labore tempora libero nulla cum.
-          Porro, deleniti. Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Sunt corporis neque reiciendis fugiat labore tempora libero
-          nulla cum. Porro, deleniti.`}
+              value={comment.content}
             />
             <div className="flex  justify-end">
               <Button
@@ -66,18 +66,10 @@ const Comment = () => {
             </div>
           </div>
         ) : (
-          <li className="dark:text-white text-[12px]">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            corporis neque reiciendis fugiat labore tempora libero nulla cum.
-            Porro, deleniti. Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Sunt corporis neque reiciendis fugiat labore tempora libero
-            nulla cum. Porro, deleniti. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Sunt corporis neque reiciendis fugiat labore
-            tempora libero nulla cum. Porro, deleniti.
-          </li>
+          <li className="dark:text-white text-[12px]">{comment.content}</li>
         )}
       </ul>
-    </div>
+    </AnimatedContainer>
   );
 };
 

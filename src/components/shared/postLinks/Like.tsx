@@ -13,9 +13,10 @@ export interface LikeProps {
   likesCount: number;
   isLiked: boolean;
   postId: string;
+  postedBy: string;
 }
 
-const Like = ({ likesCount, isLiked, postId }: LikeProps) => {
+const Like = ({ likesCount, isLiked, postId, postedBy }: LikeProps) => {
   // states
 
   // redux hooks
@@ -48,8 +49,11 @@ const Like = ({ likesCount, isLiked, postId }: LikeProps) => {
     isSuccess: isDeleteSuccess,
   } = useMutation({
     mutationFn: async () => {
+      const reactionFrom = session?.data?.user?._doc?._id;
+      const reactedTo = postedBy;
+
       const res = await axiosInstance.delete(
-        `/reactions/remove/like/${user?._doc?._id}/${postId}`
+        `/reactions/remove/like/${postId}/${reactionFrom}/${reactedTo}`
       );
       return res?.data;
     },
@@ -59,23 +63,25 @@ const Like = ({ likesCount, isLiked, postId }: LikeProps) => {
 
   // functions
   const handleLikeChange = async () => {
-    console.log({
-      postId,
-      user: session?.data?.user?._doc?._id,
-    });
+    if (isAddPending || isDeletePending) return;
 
     dispatch(
       updateLikes({
         postId,
       })
     );
+
+    console.log(isLiked);
+
     if (isLiked) {
       deleteLike();
     } else {
       addLike({
         user: session?.data?.user?._doc?._id,
-        post: postId,
         type: "like",
+        post: postId,
+        reactionFrom: session?.data?.user?._doc?._id,
+        reactedTo: postedBy,
       });
     }
   };
@@ -103,7 +109,9 @@ const Like = ({ likesCount, isLiked, postId }: LikeProps) => {
         alt="Like Icon"
       /> */}
       <FaHeart
-        className={`text-md  ${isLiked ? " text-primary" : "text-gray-400"}`}
+        className={`text-md  ${isLiked ? " text-primary" : "text-gray-400"}  ${
+          isAddPending || isDeletePending ? "  animate-pulse" : ""
+        }`}
       />
 
       <p>{formatNumber(likesCount)}</p>
