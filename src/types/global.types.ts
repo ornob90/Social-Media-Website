@@ -1,3 +1,9 @@
+export interface ModalProps {
+  isModalOpen: boolean;
+  onModalChange: () => void;
+  onClose?: () => void;
+}
+
 export type LinkType = {
   src: string;
   width: number;

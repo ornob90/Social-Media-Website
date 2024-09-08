@@ -3,14 +3,11 @@ import React from "react";
 import { Modal, ModalContent, useDisclosure } from "@nextui-org/modal";
 import { PiWarningCircle } from "react-icons/pi";
 import { Button } from "@nextui-org/button";
-import { ConfirmModalBtnEnum } from "@/types/global.types";
+import { ConfirmModalBtnEnum, ModalProps } from "@/types/global.types";
 
-export interface ConfirmDeleteModelProps {
+export interface ConfirmDeleteModelProps extends ModalProps {
   warningMessage: string;
-  isModalOpen: boolean;
   isConfirmLoad: boolean;
-  onModalChange: () => void;
-  onClose?: () => void;
   onConfirmation: (action: ConfirmModalBtnEnum) => void;
 }
 

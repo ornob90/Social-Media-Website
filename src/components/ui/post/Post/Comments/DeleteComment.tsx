@@ -10,10 +10,15 @@ import { useDispatch } from "react-redux";
 
 export interface DeleteCommentProps {
   comment: CommentInterface;
-  commentIndex: number
+  commentIndex: number;
+  selected: string;
 }
 
-export function DeleteComment({ comment, commentIndex }: DeleteCommentProps) {
+export function DeleteComment({
+  comment,
+  commentIndex,
+  selected,
+}: DeleteCommentProps) {
   // states
   const [isConfirming, setIsConfirming] = useState(false);
 
@@ -63,12 +68,18 @@ export function DeleteComment({ comment, commentIndex }: DeleteCommentProps) {
     }
   }, [isSuccess]);
 
+  useEffect(() => {
+    if (selected === "delete") {
+      setIsConfirming(!isConfirming);
+    }
+  }, [selected]);
+
   return (
     <>
-      <MdOutlineDelete
+      {/* <MdOutlineDelete
         onClick={() => setIsConfirming(!isConfirming)}
         className=" cursor-pointer text-lg text-red-500"
-      />
+      /> */}
       <ConfirmDeleteModel
         warningMessage="Are you sure? This comment will be deleted!"
         isModalOpen={isConfirming}

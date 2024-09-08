@@ -77,6 +77,14 @@ const Comment = ({ comment, commentIndex }: CommentProps) => {
     setDraftComment(comment.content);
   }, [comment.content]);
 
+  useEffect(() => {
+    if (!selected) return;
+
+    if (selected === "edit") {
+      setIsEdit(!isEdit);
+    }
+  }, [selected]);
+
   return (
     <AnimatedContainer className="md:grid flex   md:grid-cols-12 items-start gap-x-2 sm:gap-x-4 md:gap-x-4 lg:gap-x-8  py-2 w-[90%]">
       <div className="md:col-span-1 w-max">
@@ -104,8 +112,12 @@ const Comment = ({ comment, commentIndex }: CommentProps) => {
                 className=" cursor-pointer text-lg text-primary"
               />
             )}
-            <DeleteComment comment={comment} commentIndex={commentIndex} />
-          </div> */}
+            </div> */}
+          <DeleteComment
+            comment={comment}
+            commentIndex={commentIndex}
+            selected={selected}
+          />
           <CommentDropdown
             onChange={(value) => {
               console.log(value);
@@ -129,7 +141,7 @@ const Comment = ({ comment, commentIndex }: CommentProps) => {
             value={draftComment}
             onChange={(e) => setDraftComment(e.target.value)}
           />
-          <div className="flex  justify-end">
+          <div className="flex  justify-end gap-x-2">
             <Button
               onClick={() => {
                 !isPending &&
@@ -143,6 +155,13 @@ const Comment = ({ comment, commentIndex }: CommentProps) => {
               className="bg-gray-800 hover:!bg-gray-800 text-white"
             >
               {isPending ? "Updating" : "Update"}
+            </Button>
+            <Button
+              onClick={() => setIsEdit(false)}
+              size="sm"
+              className="bg-red-500 text-white"
+            >
+              Cancel
             </Button>
           </div>
         </AnimatedContainer>
