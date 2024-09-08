@@ -20,7 +20,7 @@ export const options: NextAuthOptions = {
       async authorize(credentials, req) {
         const { email, password } = credentials || {};
 
-        // console.log({ email, password });
+        // // console.log({ email, password });
         if (!email || !password) {
           return null;
         }
@@ -74,16 +74,16 @@ export const options: NextAuthOptions = {
           expiresIn: "7d",
         });
 
-        console.log(apiToken);
+        // console.log(apiToken);
 
         restUser.apiToken = apiToken;
 
-        console.log(restUser);
+        // console.log(restUser);
 
         session.user = restUser;
         // session.expires = "7d";
       }
-      // console.log(token);
+      // // console.log(token);
       return session;
     },
     async jwt({ token, user }) {
@@ -91,15 +91,15 @@ export const options: NextAuthOptions = {
         token.id = user.id;
         await connectDB();
         const userInfo = await User.findById(user.id);
-        console.log(userInfo);
+        // console.log(userInfo);
         const { password, ...restUserData } = userInfo._doc;
 
         token.user = restUserData;
         token.iat = Math.floor(Date.now() / 1000);
         token.exp = Math.floor(Date.now() / 1000) + SESSION_EXPIRE_TIME;
       }
-      // console.log(user);
-      // console.log(token);
+      // // console.log(user);
+      // // console.log(token);
       return token;
     },
     async signIn({ user, account }) {
@@ -108,7 +108,7 @@ export const options: NextAuthOptions = {
 
         const userInfo = await User.findOne({ _id: user.id });
 
-        // console.log({ id: user.id });
+        // // console.log({ id: user.id });
 
         return userInfo;
       } else return true;

@@ -73,17 +73,20 @@ const Posts = ({ initialPosts, fetchPosts }: PostsProp) => {
     dispatch(addPosts(postsToSave));
   }, [data]);
 
+  console.log(posts);
   return (
     <section className="flex flex-col gap-[60px]">
       {posts?.map((post) => (
         <Post post={post} key={post._id} />
       ))}
 
-      <section ref={ref} className="flex flex-col gap-y-10">
-        {[1, 2, 3, 4, 5].map((p) => (
-          <PostSkeleton key={p} />
-        ))}
-      </section>
+      {posts?.length > 0 && (
+        <section ref={ref} className="flex flex-col gap-y-10">
+          {[1, 2, 3, 4, 5].map((p) => (
+            <PostSkeleton key={p} />
+          ))}
+        </section>
+      )}
     </section>
   );
 };
