@@ -70,6 +70,7 @@ const Comment = ({ comment, commentIndex }: CommentProps) => {
         })
       );
       setIsEdit(false);
+      setSelected("");
     }
   }, [isSuccess]);
 
@@ -149,15 +150,18 @@ const Comment = ({ comment, commentIndex }: CommentProps) => {
                     content: draftComment,
                   });
               }}
-              disabled={isPending}
+              disabled={isPending || draftComment === comment.content}
               isLoading={isPending}
               size="sm"
-              className="bg-gray-800 hover:!bg-gray-800 text-white"
+              className="bg-gray-800 disabled:bg-gray-800/80 disabled:cursor-not-allowed hover:!bg-gray-800 text-white"
             >
               {isPending ? "Updating" : "Update"}
             </Button>
             <Button
-              onClick={() => setIsEdit(false)}
+              onClick={() => {
+                setIsEdit(false);
+                setSelected("");
+              }}
               size="sm"
               className="bg-red-500 text-white"
             >

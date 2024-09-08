@@ -18,6 +18,9 @@ import { Textarea } from "@nextui-org/input";
 let isTrue = false;
 
 const Share = ({ post }: { post: PostInterface }) => {
+  // constants
+  const HAVE_IMAGES = post.images?.length > 0;
+
   // states
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -54,10 +57,13 @@ const Share = ({ post }: { post: PostInterface }) => {
       <Modal
         isOpen={isModalOpen}
         onOpenChange={() => setIsModalOpen(!isModalOpen)}
+        scrollBehavior={HAVE_IMAGES ? "outside" : "normal"}
+        // className={`${HAVE_IMAGES ? "!w-[60%]" : ""}`}
+        size={HAVE_IMAGES ? "4xl" : "lg"}
       >
         <ModalContent>
           {(onClose) => (
-            <section className="p-4 flex flex-col gap-y-4">
+            <section className={`p-4 flex  flex-col gap-y-4 `}>
               <PostedBy {...user} />
               <Textarea placeholder="Say something about this" size="sm" />
               <section className="border p-4 rounded-xl">

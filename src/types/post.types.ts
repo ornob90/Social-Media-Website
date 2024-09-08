@@ -20,4 +20,5 @@ export interface Post {
   isLiked: boolean;
   createdAt?: Date;
   updatedAt?: Date;
+  sharedPostId: Post;
 }

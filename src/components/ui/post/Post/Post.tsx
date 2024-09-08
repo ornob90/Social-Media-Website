@@ -9,6 +9,7 @@ import { Post as PostInterface } from "@/types/post.types";
 import AnimatedContainer from "@/components/containers/AnimatedContainers";
 import PostedBy from "@/components/shared/postedby/PostedBy";
 import Content from "@/components/shared/content/Content";
+import SharedPost from "../SharedPost/SharedPost";
 
 export interface PostProps {
   post: PostInterface;
@@ -27,7 +28,7 @@ const Post = ({ post, hideReactions }: PostProps) => {
       </header>
       {/* Content  */}
       <div>
-        <Content className="lg:w-[90%] mt-3 text-sm" content={post.content} />
+        <Content className="lg:w-[90%] mt-3 text-sm" content={post?.content} />
         {post.images?.length > 0 && (
           <div className="relative w-full lg:w-[90%] h-[350px] md:h-[400px] lg:h-[450px] object-cover mt-5 rounded-md">
             <Image
@@ -40,6 +41,12 @@ const Post = ({ post, hideReactions }: PostProps) => {
           </div>
         )}
       </div>
+
+      {post?.sharedPostId && (
+        <div className="p-4 border rounded-xl mt-4">
+          <SharedPost post={post.sharedPostId} />
+        </div>
+      )}
 
       {/* Like Share Comment  */}
 

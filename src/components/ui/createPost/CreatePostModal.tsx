@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 const CreatePostModal = ({ postAvailable }: { postAvailable: string }) => {
   // other hooks
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const isModuleMount = useRef();
+  const isModuleMount = useRef<boolean>();
   const router = useRouter();
 
   useEffect(() => {
