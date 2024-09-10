@@ -29,3 +29,23 @@ export const getNewsFeedPosts = async (page: number) => {
     return null;
   }
 };
+
+export const getPostDetails = async (postId: string): Promise<Post | null> => {
+  try {
+    const session = await getServerSession(options);
+
+    const response = await fetch(
+      process.env.SERVER_BASE_URL +
+        `/posts/owner/${session?.user?._id}/${postId}`
+    );
+    const result = await response.json();
+
+    if (result?.acknowledgement) {
+      return result?.data;
+    }
+
+    return null;
+  } catch (error) {
+    return null;
+  }
+};

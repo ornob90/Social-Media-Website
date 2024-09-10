@@ -3,10 +3,12 @@ import { Post } from "@/types/post.types";
 
 export interface PostInitialState {
   posts: Post[];
+  curSelectedPost: Post | null;
 }
 
 const initialState: PostInitialState = {
   posts: [],
+  curSelectedPost: null,
 };
 
 const postSlice = createSlice({
@@ -42,9 +44,18 @@ const postSlice = createSlice({
 
       state.posts = newPosts;
     },
+    updateTopRowFieldOfPostSlice: (state, { payload }) => {
+      const { key, value } = payload as { key: string; value: any };
+      state[key] = value;
+    },
   },
 });
 
-export const { addPosts, updateLikes, addPostAtFirst } = postSlice.actions;
+export const {
+  addPosts,
+  updateLikes,
+  addPostAtFirst,
+  updateTopRowFieldOfPostSlice,
+} = postSlice.actions;
 
 export default postSlice.reducer;

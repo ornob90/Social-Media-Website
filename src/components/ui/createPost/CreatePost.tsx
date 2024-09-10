@@ -1,15 +1,12 @@
+"use client";
 import PostForm from "@/components/forms/PostForm/PostForm";
 import Header from "@/components/shared/header/Header";
 import PostAvailable from "@/components/ui/post/PostAvailable/PostAvailable";
 import { SearchParams } from "@/types/global.types";
+import { useState } from "react";
 
-const CreatePost = ({
-  postAvailable,
-  onCloseModal,
-}: {
-  postAvailable: string;
-  onCloseModal?: () => void;
-}) => {
+const CreatePost = ({ onCloseModal }: { onCloseModal?: () => void }) => {
+  const [privacy, setPrivacy] = useState<"public" | "private">("public");
   return (
     <section className="w-full no-scrollbar">
       <Header header="Create a Post" />
@@ -21,18 +18,20 @@ const CreatePost = ({
             alt="Globe Icon"
             type="People"
             subText="Your Post will be global"
-            isActive={!postAvailable || postAvailable === "people"}
+            isActive={privacy === "public"}
+            onClick={() => setPrivacy("public")}
           />
           <PostAvailable
             src="/assets/lock.svg"
             alt="Lock Icon"
             type="Private"
             subText="Your Post will be private"
-            isActive={postAvailable === "private"}
+            isActive={privacy === "private"}
+            onClick={() => setPrivacy("private")}
           />
         </div>
       </div>
-      <PostForm postAvailable={postAvailable} onCloseModal={onCloseModal} />
+      <PostForm privacy={privacy} onCloseModal={onCloseModal} />
     </section>
   );
 };

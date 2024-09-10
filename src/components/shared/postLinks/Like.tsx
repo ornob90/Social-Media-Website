@@ -114,7 +114,12 @@ const Like = ({ likesCount, isLiked, postId, postedBy }: LikeProps) => {
         }`}
       />
 
-      <p>{formatNumber(likesCount)}</p>
+      <p
+        onClick={(e) => e.stopPropagation()}
+        className=" hover:underline cursor-pointer"
+      >
+        {formatNumber(likesCount)}
+      </p>
     </div>
   );
 };

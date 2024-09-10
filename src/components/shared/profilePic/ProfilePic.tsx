@@ -43,9 +43,7 @@ const ProfilePic = ({
 
   return (
     <div
-      className={`border border-gray-200 relative   ${
-        squareShape ? " rounded-md" : "rounded-full"
-      } 
+      className={` relative   ${squareShape ? " rounded-md" : "rounded-full"} 
          ${className || "w-[30px] h-[30px] md:h-[33px] md:w-[33px]"}`}
     >
       <Image

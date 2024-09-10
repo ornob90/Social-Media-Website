@@ -1,8 +1,6 @@
 import Like from "@/components/shared/postLinks/Like";
 import Share from "@/components/shared/postLinks/Share";
-import ProfilePic from "@/components/shared/profilePic/ProfilePic";
-import Image from "next/image";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Comments from "./Comments/Comments";
 import CommentLink from "@/components/shared/postLinks/CommentLink";
 import { Post as PostInterface } from "@/types/post.types";
@@ -10,12 +8,18 @@ import AnimatedContainer from "@/components/containers/AnimatedContainers";
 import PostedBy from "@/components/shared/postedby/PostedBy";
 import Content from "@/components/shared/content/Content";
 import SharedPost from "../SharedPost/SharedPost";
+import ImagesGrid from "@/components/shared/images-grid/ImagesGrid";
+import { usePathname, useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { updateTopRowFieldOfPostSlice } from "@/redux/features/postSlice";
 
 export interface PostProps {
   post: PostInterface;
   hideReactions?: boolean;
   removeBorder?: boolean;
   removePadding?: boolean;
+  defaultShowComments?: boolean;
+  onModalChange?: () => void;
 }
 
 const Post = ({
@@ -23,9 +27,37 @@ const Post = ({
   hideReactions,
   removeBorder,
   removePadding,
+  defaultShowComments,
+  onModalChange,
 }: PostProps) => {
   // states
-  const [showComments, setShowComments] = useState(false);
+  const [showComments, setShowComments] = useState(defaultShowComments);
+
+  // routes hooks
+  const router = useRouter();
+  const pathname = usePathname();
+  const isPostDetailPage = pathname.startsWith("/posts");
+
+  // redux hooks
+  const dispatch = useDispatch();
+
+  // functions
+  const handleOnImageClick = (idx: number) => {
+    dispatch(
+      updateTopRowFieldOfPostSlice({
+        key: "curSelectedPost",
+        value: post,
+      })
+    );
+
+    if (isPostDetailPage) {
+      onModalChange && onModalChange();
+    }
+
+    if (!isPostDetailPage) {
+      router.push(`/posts/${post._id}?imageIndex=${idx}`);
+    }
+  };
 
   return (
     <AnimatedContainer
@@ -42,15 +74,7 @@ const Post = ({
       <div className="flex flex-col gap-y-4">
         <Content className="lg:w-[90%]  text-sm" content={post?.content} />
         {post.images?.length > 0 && (
-          <div className="relative w-full lg:w-[90%] h-[350px] md:h-[400px] lg:h-[450px] object-cover  rounded-md">
-            <Image
-              src={post.images[0]}
-              fill
-              alt="Alternate Image"
-              className="rounded-md "
-              style={{ objectFit: "cover" }}
-            />
-          </div>
+          <ImagesGrid onImageClick={handleOnImageClick} images={post.images} />
         )}
       </div>
 

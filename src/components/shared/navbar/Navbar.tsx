@@ -8,9 +8,9 @@ import { navLinks } from "@/data/navLinks";
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 w-full z-50  bg-transparent h-max ">
-      <section className="dark:bg-dark-primary shadow-sm bg-white mx-auto w-full min-h-[50px] py-1 mb-4  relative ">
-        <div className="max-w-[1512px] grid grid-cols-1 md:grid-cols-6 w-[90%] mx-auto items-center gap-4 md:gap-0 ">
+    <nav className="fixed top-0 w-full z-50  bg-transparent h-max  bg-white">
+      <section className="dark:bg-dark-primary max-w-7xl  shadow-sm  mx-auto w-full min-h-[50px] py-1   relative ">
+        <div className="grid grid-cols-1 md:grid-cols-6 w-[90%] mx-auto items-center gap-4 md:gap-0 ">
           {/* Title and Logo */}
           <div className="flex items-center gap-2  justify-between md:col-span-1  ">
             {/* Header  */}

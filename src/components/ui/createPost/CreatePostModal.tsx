@@ -12,7 +12,7 @@ import {
 import CreatePost from "./CreatePost";
 import { useRouter } from "next/navigation";
 
-const CreatePostModal = ({ postAvailable }: { postAvailable: string }) => {
+const CreatePostModal = () => {
   // other hooks
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const isModuleMount = useRef<boolean>();
@@ -34,8 +34,8 @@ const CreatePostModal = ({ postAvailable }: { postAvailable: string }) => {
         onOpenChange();
       }}
       size="2xl"
-      className="p-4"
-      scrollBehavior="normal"
+      className="p-4 no-scrollbar"
+      scrollBehavior="outside"
       placement="top"
     >
       <ModalContent className="">
@@ -47,7 +47,6 @@ const CreatePostModal = ({ postAvailable }: { postAvailable: string }) => {
                   router.back();
                   onClose();
                 }}
-                postAvailable={postAvailable}
               />
             </ModalBody>
           </>

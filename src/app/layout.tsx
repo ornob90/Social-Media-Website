@@ -27,7 +27,7 @@ export default function RootLayout({
   trending: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="light" data-theme="light">
+    <html lang="en" className="light bg-[#eeeeee]" data-theme="light">
       <body
         className={`dark:bg-dark-primary bg-[#eeeeee] ${poppins.className}`}
       >
@@ -36,7 +36,7 @@ export default function RootLayout({
             <NextAuthSessionProvider>
               <EdgeStoreProvider>
                 <Navbar />
-                <div className=" w-[90%]  pt-[5%] grid grid-cols-1 lg:grid-cols-9 gap-x-4 max-w-[1512px] mx-auto  bg-transparent">
+                <div className="  max-w-7xl  mx-auto w-[90%]  xl:mt-[5%] grid grid-cols-1 lg:grid-cols-9 gap-x-4   bg-transparent">
                   <div className="lg:col-span-2 relative h-auto ">
                     {sidebar}
                   </div>

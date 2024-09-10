@@ -17,13 +17,17 @@ const WhoToFollow = () => {
 
 function UserToFollow() {
   return (
-    <div className="flex gap-x-2  justify-between items-center">
-      <ProfilePic className=" size-10" />
-      <div className="flex-1 font-medium flex flex-col justify-between  ">
-        <p>Florian Wather</p>
-        <p className="text-sm    text-gray-400">@Florian</p>
+    <div className="flex gap-x-2  justify-between xl:justify-start items-center">
+      <div className="flex flex-1">
+        <div className="min-w-6 xl:min-w-10">
+          <ProfilePic className="  max-w-6 max-h-6 xl:max-w-10 xl:max-h-10 !size-6 xl:size-10" />
+        </div>
+        <div className=" font-medium flex flex-col justify-between   ">
+          <p className=" truncate text-xs xl:text-sm">Florian Wather</p>
+          <p className="text-xs    text-gray-400">@Florian</p>
+        </div>
       </div>
-      <FollowBtn />
+      <FollowBtn className=" text-xs !px-2" />
     </div>
   );
 }

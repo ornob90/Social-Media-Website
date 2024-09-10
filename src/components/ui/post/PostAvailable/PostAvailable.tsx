@@ -9,11 +9,12 @@ const PostAvailable = ({
   type,
   subText,
   isActive,
+  onClick,
 }: PostAvailableType) => {
   return (
-    <Link
-      href={`/create?post-available=${type.toLowerCase()}`}
-      className={`flex-1 flex gap-3 py-2 ${
+    <section
+      onClick={onClick}
+      className={`flex-1 flex gap-3 py-2 cursor-pointer ${
         isActive ? "bg-light-gray dark:bg-dark-gray rounded-md " : ""
       }`}
     >
@@ -32,7 +33,7 @@ const PostAvailable = ({
           {subText}
         </p>
       </div>
-    </Link>
+    </section>
   );
 };
 

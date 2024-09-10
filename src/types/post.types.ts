@@ -6,6 +6,7 @@ export type PostAvailableType = {
   alt: string;
   src: string;
   isActive: boolean;
+  onClick: React.MouseEventHandler<HTMLElement> | undefined;
 };
 
 export interface Post {

@@ -43,7 +43,7 @@ const Posts = ({ initialPosts, fetchPosts }: PostsProp) => {
       },
       initialPageParam: 1,
       getNextPageParam(lastPage, allPages) {
-        return lastPage && lastPage?.length > 0
+        return lastPage && lastPage?.length === 10
           ? allPages.length + 1
           : undefined;
       },
@@ -75,12 +75,12 @@ const Posts = ({ initialPosts, fetchPosts }: PostsProp) => {
 
   // console.log(posts[0]);
   return (
-    <section className="flex flex-col gap-y-4">
+    <section className="flex flex-col gap-y-4 mb-4">
       {posts?.map((post) => (
         <Post post={post} key={post._id} />
       ))}
 
-      {posts?.length > 0 && (
+      {posts?.length > 0 && hasNextPage && (
         <section ref={ref} className="flex flex-col gap-y-10">
           {[1, 2, 3, 4, 5].map((p) => (
             <PostSkeleton key={p} />

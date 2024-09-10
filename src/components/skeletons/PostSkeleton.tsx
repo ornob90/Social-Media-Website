@@ -2,7 +2,7 @@ import React from "react";
 
 const PostSkeleton = () => {
   return (
-    <div className="dark:text-white ">
+    <div className="dark:text-white p-4  rounded-xl bg-white">
       {/* Header and Name Skeleton */}
       <header className="flex items-center gap-2 h-max py-2">
         <div className="w-[30px] h-[30px] md:h-[33px] animate-pulse md:w-[33px] bg-gray-200 rounded-full"></div>
