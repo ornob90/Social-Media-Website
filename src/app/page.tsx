@@ -14,7 +14,7 @@ export default async function Home() {
   const { totalPosts, posts } = (await getNewsFeedPosts(1)) || {};
 
   return (
-    <main className="w-full bg-white p-8 rounded-xl">
+    <main className="w-full rounded-xl">
       <Header header="Home" />
       <Suspense
         fallback={

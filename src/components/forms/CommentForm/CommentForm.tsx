@@ -97,9 +97,9 @@ const CommentForm = ({ post }: CommentFormProps) => {
     <form
       onSubmit={handleAddComment}
       action=""
-      className="p-4 border border-light-gray dark:border-dark-gray shadow-sm rounded-xl mb-10"
+      className="p-4 border flex flex-col gap-y-4 border-light-gray dark:border-dark-gray shadow-sm rounded-xl "
     >
-      <div className="flex gap-4 mb-4 rounded-xl">
+      <div className="flex gap-4  rounded-xl">
         <ProfilePic />
         <Textarea
           variant="faded"

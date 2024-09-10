@@ -14,23 +14,35 @@ import SharedPost from "../SharedPost/SharedPost";
 export interface PostProps {
   post: PostInterface;
   hideReactions?: boolean;
+  removeBorder?: boolean;
+  removePadding?: boolean;
 }
 
-const Post = ({ post, hideReactions }: PostProps) => {
+const Post = ({
+  post,
+  hideReactions,
+  removeBorder,
+  removePadding,
+}: PostProps) => {
   // states
   const [showComments, setShowComments] = useState(false);
 
   return (
-    <AnimatedContainer layout={false} className="dark:text-white">
+    <AnimatedContainer
+      layout={false}
+      className={`dark:text-white bg-white  rounded-xl  shadow-sm flex flex-col gap-y-4 ${
+        removeBorder ? "" : "border"
+      } ${removePadding ? "" : "p-4"}`}
+    >
       {/* Header and Name  */}
       <header>
         <PostedBy {...post?.user} />
       </header>
       {/* Content  */}
-      <div>
-        <Content className="lg:w-[90%] mt-3 text-sm" content={post?.content} />
+      <div className="flex flex-col gap-y-4">
+        <Content className="lg:w-[90%]  text-sm" content={post?.content} />
         {post.images?.length > 0 && (
-          <div className="relative w-full lg:w-[90%] h-[350px] md:h-[400px] lg:h-[450px] object-cover mt-5 rounded-md">
+          <div className="relative w-full lg:w-[90%] h-[350px] md:h-[400px] lg:h-[450px] object-cover  rounded-md">
             <Image
               src={post.images[0]}
               fill
@@ -43,7 +55,7 @@ const Post = ({ post, hideReactions }: PostProps) => {
       </div>
 
       {post?.sharedPostId && (
-        <div className="p-4 border rounded-xl mt-4">
+        <div className="p-4 border rounded-xl">
           <SharedPost post={post.sharedPostId} />
         </div>
       )}
@@ -51,7 +63,7 @@ const Post = ({ post, hideReactions }: PostProps) => {
       {/* Like Share Comment  */}
 
       {!hideReactions && (
-        <div className="flex gap-10 text-dark-gray mt-3 ">
+        <div className="flex gap-10 text-dark-gray  -mt-1">
           <Like
             likesCount={post.likesCount}
             postId={post._id}

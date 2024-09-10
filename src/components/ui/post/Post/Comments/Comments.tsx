@@ -73,8 +73,8 @@ const Comments = ({ post }: { post: PostInterface }) => {
   }, [isSuccess, data]);
 
   return (
-    <div className="mt-10">
-      <Header header={`Comments | ${15}K`} className="!text-lg" />
+    <div className=" flex  flex-col gap-y-4">
+      <Header header={`Comments | ${15}K`} className="!text-lg !mb-0 !p-0" />
       <CommentForm post={post} />
 
       {isPending && comments[postId]?.length === 0 ? (

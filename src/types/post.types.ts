@@ -22,3 +22,10 @@ export interface Post {
   updatedAt?: Date;
   sharedPostId: Post;
 }
+
+export interface SavedPost {
+  user: string;
+  content: string;
+  images?: string[];
+  sharedPostId?: string;
+}

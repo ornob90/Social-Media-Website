@@ -24,7 +24,7 @@ export const getNewsFeedPosts = async (page: number) => {
     }
 
     return null;
-  } catch (error) {
+  } catch (error: any) {
     console.log(error.message);
     return null;
   }

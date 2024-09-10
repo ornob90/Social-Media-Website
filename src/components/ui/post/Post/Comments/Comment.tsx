@@ -16,6 +16,7 @@ import useAxios from "@/hooks/useAxios";
 import { updateCommentByIndex } from "@/redux/features/reactionsSlice";
 import { BsThreeDots } from "react-icons/bs";
 import CommentDropdown from "./CommentDropdown";
+import Content from "@/components/shared/content/Content";
 // import CommentDropdown from "./CommentDropdown";
 
 export interface CommentProps {
@@ -87,13 +88,13 @@ const Comment = ({ comment, commentIndex }: CommentProps) => {
   }, [selected]);
 
   return (
-    <AnimatedContainer className="md:grid flex   md:grid-cols-12 items-start gap-x-2 sm:gap-x-4 md:gap-x-4 lg:gap-x-8  py-2 w-[90%]">
+    <AnimatedContainer className=" flex  gap-x-3  py-2 ">
       <div className="md:col-span-1 w-max">
         <ProfilePic />
       </div>
-      <ul className=" max-md:flex-1 md:col-span-11 flex flex-col justify-between">
-        <li className="flex justify-between ">
-          <div className=" flex flex-col md:flex-row items-start md:items-center gap-x-2 font-semibold mb-3">
+      <ul className="flex-1 max-md:flex-1 md:col-span-11 flex flex-col justify-between ">
+        <li className="flex justify-between  -mt-2">
+          <div className=" flex flex-col md:flex-row items-start md:items-center gap-x-2 font-semibold">
             {comment.reactionFrom.displayName}
             <p className="text-dark-gray text-[12px] font-normal">
               {timesAgo(comment.createdAt)}
@@ -176,7 +177,10 @@ const Comment = ({ comment, commentIndex }: CommentProps) => {
           exit={{ opacity: 0, y: -50 }}
           transition={{ duration: 0 }}
         >
-          <li className="dark:text-white text-[12px]">{draftComment}</li>
+          <Content
+            className="dark:text-white text-[12px]"
+            content={draftComment}
+          />
         </AnimatedContainer>
       </ul>
     </AnimatedContainer>

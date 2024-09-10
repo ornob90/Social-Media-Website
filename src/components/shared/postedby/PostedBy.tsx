@@ -6,7 +6,7 @@ export interface PostedByProps extends User {}
 
 const PostedBy = ({ photoUrl, displayName, userName }: PostedByProps) => {
   return (
-    <section className="flex  items-center gap-2 h-max py-2 ">
+    <section className="flex  items-center gap-2 h-max  ">
       <ProfilePic className="size-9" url={photoUrl} />
       <ul className="flex flex-col justify-between">
         <li className="font-semibold">{displayName}</li>

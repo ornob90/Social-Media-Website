@@ -1,4 +1,4 @@
-import { Post as PostInterface } from "@/types/post.types";
+import { Post as PostInterface, SavedPost } from "@/types/post.types";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import {
@@ -14,6 +14,10 @@ import PostedBy from "../postedby/PostedBy";
 import { useSession } from "next-auth/react";
 import { Button } from "@nextui-org/button";
 import { Textarea } from "@nextui-org/input";
+import useAxios from "@/hooks/useAxios";
+import { useMutation } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
+import { addPostAtFirst } from "@/redux/features/postSlice";
 
 let isTrue = false;
 
@@ -23,27 +27,51 @@ const Share = ({ post }: { post: PostInterface }) => {
 
   // states
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [content, setContent] = useState("");
 
   // session hooks
   const session = useSession();
   const user = session.data?.user;
 
   // custom hooks
+  const axiosInstance = useAxios();
 
   // redux hooks
+  const dispatch = useDispatch();
 
   // package hooks
   const { isOpen } = useDisclosure();
+  const {
+    mutate: addSharedPost,
+    data: sharedPostResponse,
+    isPending,
+    isError,
+    isSuccess,
+  } = useMutation({
+    mutationFn: async (data: SavedPost) => {
+      const result = await axiosInstance.post("/posts/create", data);
+      return result?.data;
+    },
+  });
 
   // functions
+  const handleSaveSharePost = () => {
+    const sharedPost = {
+      user: user?._id,
+      sharedPostId: post?.sharedPostId?._id || post?._id,
+      content,
+    };
+
+    addSharedPost(sharedPost);
+  };
 
   // effects
   useEffect(() => {
-    // if (!isTrue) {
-    //   setIsModalOpen(true);
-    //   isTrue = true;
-    // }
-  }, []);
+    if (isSuccess) {
+      dispatch(addPostAtFirst(sharedPostResponse?.data));
+      setIsModalOpen(false);
+    }
+  }, [isSuccess]);
 
   return (
     <div>
@@ -65,15 +93,36 @@ const Share = ({ post }: { post: PostInterface }) => {
           {(onClose) => (
             <section className={`p-4 flex  flex-col gap-y-4 `}>
               <PostedBy {...user} />
-              <Textarea placeholder="Say something about this" size="sm" />
+              <Textarea
+                onChange={(e) => setContent(e.target.value)}
+                value={content}
+                placeholder="Say something about this"
+                size="sm"
+              />
               <section className="border p-4 rounded-xl">
-                <Post post={post} hideReactions />
+                <Post
+                  post={post?.sharedPostId || post}
+                  hideReactions
+                  removeBorder
+                  removePadding
+                />
               </section>
               <section className="flex justify-end gap-x-2">
-                <Button size="sm" className=" bg-primary text-white">
+                <Button
+                  disabled={isPending}
+                  isLoading={isPending}
+                  onClick={handleSaveSharePost}
+                  size="sm"
+                  className=" bg-primary text-white"
+                >
                   Share
                 </Button>
-                <Button size="sm" variant="bordered">
+                <Button
+                  disabled={isPending}
+                  onClick={() => setIsModalOpen(false)}
+                  size="sm"
+                  variant="bordered"
+                >
                   Cancel
                 </Button>
               </section>
